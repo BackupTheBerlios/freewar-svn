@@ -17,8 +17,28 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include "freewar.h"
 
+int		init_sdl()
+{
+  if (SDL_Init(SDL_INIT_TIMER |
+	       SDL_INIT_AUDIO |
+	       SDL_INIT_VIDEO) < 0)
+    {
+      fprintf(fd_log, "SDL_Init: %s\n", SDL_GetError()); 
+      return (0);
+    }
+  atexit(SDL_Quit);
+  if (SDLNet_Init() == -1)
+    {
+      fprintf(fd_log, "SDLNet_Init: %s\n", SDLNet_GetError());
+      return (1);
+    }
+  atexit(SDLNet_Quit);
+  return (0);
+}
+
 void		init_engine(t_engine *e)
 {
+  init_sdl();
   memset(e->select, 0, sizeof(t_entity*) * FW_MAX_SELECT);
   e->console = false;
   e->scales = 0;

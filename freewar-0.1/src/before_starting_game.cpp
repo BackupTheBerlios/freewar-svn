@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Freewar; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 //
 // before_starting_game.cpp for freewar in /u/ept2/huot_j
 // 
@@ -27,6 +28,7 @@
 
 #include "freewar.h"
 
+extern t_gfx	*gfx;
 int		init_server_connection(t_trame *req);
 int		server_connections(t_game_param *gp);
 
@@ -41,6 +43,13 @@ int		before_starting_game(t_game_param *game_param)//t_engine *e, t_game_param *
 //   printf("before start\n");
 //   fflush(fd_log);
   return (HOME);
+  // TODO: TOUT ca a revoir une fois l'interface du menu defini:
+  fprintf(fd_log, "Loading menu...\n");
+  if (run_menu(gfx->win))
+    {
+      fprintf(fd_log, "%s: Quitting game...\n", NAME);
+      return (ERROR);
+    }
   req = (t_trame*)xmalloc(sizeof(*req));
   for (who_serve = NONE, send = 0, update_param = 0;
        42; send = 0, update_param = 0)

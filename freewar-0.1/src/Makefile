@@ -9,9 +9,11 @@
 ##
 
 VPATH	=	Network:STD:load:Graphics:Pathfinding:../lib/sdlgfx/\
-		:Actions:Entities:Graphics/Menu
+		:Actions:Entities:Graphics/Menu:ActionsBind
 
 SDL_GFX	=	SDL_gfxPrimitives.cpp
+
+ACTIONSBIND=	manage_events.cpp
 
 DB	=	load_db_init.cpp load_db_data.cpp unpack.cpp load_db_land.cpp\
 		load_db_index.cpp load_db_actions.cpp load_db_armor.cpp\
@@ -45,7 +47,7 @@ NET_ENGINE=	old.cpp init_msg.cpp init_connection.cpp init_client.cpp\
 
 NETWORK	=	ping_all_client.cpp wait_all_player_is_ready.cpp\
 		play_is_full.cpp send_to_all_player_new_game_status.cpp\
-		transmit.cpp give_info_to_game.cpp send_to_server_freewar.cpp\
+		transmit.cpp send_to_server_freewar.cpp\
 		recv_from_server_freewar.cpp
 
 ACTION	=	del_action.cpp del_next_actions.cpp\
@@ -72,19 +74,19 @@ ENTITY	=	construct_entity.cpp place_entity_in_map.cpp\
 CLIENT	=	entity_client_std.cpp
 
 SRC	=	freewar.cpp a_faire.cpp get_cfg.cpp std.cpp\
-		launch_game.cpp add_player.cpp get_pos.cpp game_param.cpp\
+		launch_demo.cpp add_player.cpp get_pos.cpp game_param.cpp\
 		init_game_connection.cpp init_server_connection.cpp\
 		server_connections.cpp engine_client.cpp engine_server.cpp\
-		before_starting_game.cpp open_connection_to_the_game.cpp\
+		before_starting_game.cpp open_windows.cpp\
 		get_and_init_sound.cpp get_and_init_display.cpp\
 		xml_std.cpp init_globals.cpp get_direction.cpp\
 		$(PATHFINDING) move_clients_to_players.cpp\
-		init_engine.cpp aff_game.cpp\
+		init_engine.cpp aff_game.cpp init_global_game.cpp\
 		get_path.cpp free.cpp manage_requests.cpp\
 		manage_selection.cpp join_game.cpp init_minimap.cpp\
 		init_players_for_game.cpp timer.cpp\
 		$(GRAPHICS) $(MENU) $(DB) $(ENTITY) $(NETWORK) $(NET_ENGINE)\
-		$(REQUEST) $(SDL_GFX) $(ACTION) $(CLIENT)
+		$(REQUEST) $(SDL_GFX) $(ACTION) $(CLIENT) $(ACTIONSBIND)
 
 OBJ	=	$(SRC:.cpp=.o)
 
@@ -98,7 +100,8 @@ CXXFLAGS=	-I../include/ -I../include/sdl/ `sdl-config --cflags` -g3\
 		-I../lib/sdlgfx/ -I ../lib/sdlGL/
 
 LIB	= 	-L../lib/ -L/usr/lib/ -L/usr/local/lib/ -ltinyxml_`uname -s` \
-		`sdl-config --libs` -lSDL -lSDL_net -lSDL_image -lSDL_ttf -lefence
+		`sdl-config --libs` -lSDL -lSDL_net -lSDL_image -lSDL_ttf\
+#		 -lefence
 
 CP	=	/bin/cp -f
 RM	=	/bin/rm -f
@@ -106,8 +109,7 @@ LN	=	/bin/ln -sf
 
 $(NAME)	:	$(OBJ)
 		$(CXX) -o $(NAME) $(OBJ)  $(LIB) $(CFLAGS)
-		cd .. && $(LN) src/$(NAME) $(NAME)
-		$(LN) $(NAME) $(EXECUTABLE)
+		$(CP) $(NAME) ../$(EXECUTABLE)
 
 all	:	$(NAME)
 
@@ -115,6 +117,6 @@ clean	:
 		$(RM) $(OBJ) *~ \#*\#
 
 fclean	:	clean
-		$(RM) $(NAME) ../$(NAME) ../$(EXECUTABLE)
+		$(RM) $(NAME) ../$(EXECUTABLE)
 
 re	:	fclean all

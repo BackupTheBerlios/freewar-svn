@@ -114,9 +114,6 @@ int		get_cfg(t_cfg *cfg)
     }
   else
     return(put_error("FREEWAR_CFG as not members name <root>"));    
-#ifndef WIN32
-	  cfg->GamePid = 0;
-#endif
-puts("</get_cfg>");
+  puts("</get_cfg>");
   return (0);
 }

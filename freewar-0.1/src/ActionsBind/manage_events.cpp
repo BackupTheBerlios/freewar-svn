@@ -23,9 +23,9 @@
 
 int		get_pos(t_engine *e, int xfin, int yfin)
 {
-	int	flag;
+  int	flag;
 
-	flag = 0;
+  flag = 0;
   if (xfin <= SCROLL_X)
     {
       e->g.off_arena.x -= NB_OFF_MOVE;

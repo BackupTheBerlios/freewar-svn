@@ -16,8 +16,6 @@
 
 DATE	=	`date "+%G%m%d"`
 
-GAME_PATH=	AFirstChaos
-
 SRC_PATH=	src
 
 LIB_PATH=	lib
@@ -36,7 +34,7 @@ RM	=	/bin/rm -rf
 # RULES
 ##
 
-srcfw	:	libs game
+srcfw	:	libs
 		@cd $(SRC_PATH) && make
 
 clean	:
@@ -56,30 +54,25 @@ libmd5	:
 
 libs	:	libsdl libmd5 libxml
 
-game	:	
-		@cd $(GAME_PATH) && make
-
-freewar :	game srcfw
+freewar :	srcfw
 
 re	:	fclean freewar
 
 engine	:	freewar
 
 
-all	:	libs freewar game
+all	:	libs freewar
 
 allclean:
 # 		@cd $(LIB_SDL_PATH) && make clean
 		@cd $(LIB_XML_PATH) && make clean
 # 		@cd $(LIB_MD5_PATH) && make clean
 		@cd $(SRC_PATH) && make clean
-		@cd $(GAME_PATH) && make clean
 
 
 allfclean:
 		@echo "cleaning win32"
 		$(RM) win32/Freewar/Debug
-		$(RM) win32/$(GAME_PATH)/Debug
 		$(RM) win32/$(MAP_EDT_PATH)/Debug
 		@echo "cleaning libsdl.."
 # 		@cd $(LIB_SDL_PATH) && make fclean
@@ -90,7 +83,6 @@ allfclean:
 		@echo "cleaning engine.."
 		@cd $(SRC_PATH) && make fclean
 		@echo "cleaning game.."
-		@cd $(GAME_PATH) && make fclean
 
 reall	:	allfclean all
 
@@ -99,7 +91,7 @@ tarball:	allfclean
 
 backup	:	allfclean
 		tar -cvzf backup_`uname -s`_$(USER)_$(DATE).tar.gz \
-		$(LIB_PATH) $(GAME_PATH) $(SRC_PATH) \
+		$(LIB_PATH) $(SRC_PATH) \
 		$(MAP_EDT_PATH) include/ Makefile doc/ \
 		freewar.xml
 		runsocks scp backup_`uname -s`_$(USER)_$(DATE).tar.gz \
