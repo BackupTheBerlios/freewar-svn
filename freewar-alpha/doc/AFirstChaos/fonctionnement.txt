@@ -1,0 +1,92 @@
+           Programme          |               User                  |    Chronologie
+                              |					    |      (temps)
+                              |					    |        ||
+                              |                                     |        ||
+                              |					    |        \/
+                              |					    |
+                              |/Le user lance l'executable.         |
+Le moteur se lance.          /| 				    |
+-> Le moteur lance le jeu.    |					    |
+-> Ainsi que plein de trucs. \|					    |
+			      |\La demo se lance, logo, etc...      |
+			      |					    |
+
+Le jeu initialise son reseau:
+-> init_connection(TCPsocket *sock) (avec sock deja alloue)
+
+Le jeu se met en attente des informations de la BDD
+en provenance du moteur.
+-> receive_one_request(t_trame *req), t_connection *cnt)
+-> l'apel est bloquant, le lancement du menu en depend.
+-> (inserer un timeout?? okazou le moteur begaye)
+
+				|				    |
+				|/Le user met fin a la demo	    |
+			       /| (ou elle se termine toute seule)  |
+ Le jeu dessine le menu	      / |				    |
+ principal a travers	      	|				    |
+ des requetes vers le moteur 3D	|				    |
+ (du jeu)			|				    |
+				|				    |
+				|				    |
+Au fur et a mesure que le player|
+changes les parametres		|
+le jeu en informe le moteur.	|
+Selon si le joueur join ou	|
+sert une partie le moteur	|
+fait ce kil faut (informer	|
+par le jeu)			|
+				| Le player demande de lancer
+				| la partie.
+				|
+Le jeu attends			|
+le "go" du moteur (qui s'est	|
+synchronise avec les autres
+players) pour lancer le premier
+dessin.
+A partir de la, boucle d'affichage
+(FPS) et on redissine l'ecran a chak
+interation de la boucle. (HUD + Arene).
+--> Paufiner eventuellement apres, la fonction de dessin (draw_screen)
+pour ne re-afficher que ce qui est utile (le hud par ex ca bouge pas trop, etc).
+
+Avant chaque draw, le jeu regarde sa "queue d'evenement" en provenance du moteur.
+Ces events peuvent etre de nature suivantes:
+- Event souris ou clavier de la part du player (click menu, 
+raccourci clavier, etc)
+- Info Response (reponse a un question pose).
+- Event global (deconnection d'un joueur, "all your base are belong to us",
+message text/audio, etc).
+- a completer mais je crois couvrir tout la.
+
+
+###
+
+###
+
+Le jeu se comportera donc ainsi:
+
+------- Event souris / clavier ----------
+
+Premierement la souris.
+- On determine si le x,y correspondant au click couvre l'arene ou le HUD.
+--- SI arene le jeu fait une requete d'info sur la "case" correspondant au click.
+
+--- Si HUD
+
+Si Clavier.
+- func corresp a la touche dans la bdd, (esc menu, home base, etc)
+
+
+------- Event Response ---------
+
+En fonction du "tid" le jeu retrouve la requete correspondante, et
+ayant desormais la reponse, fait le necessaire.
+
+------- Event global -----------
+
+Branche sur la fonction qui gere l'action correspondant a l'event.
+Cet event peut eventuellement necessite des informations du moteur
+--> requete reseau. Le code reprends donc apres la reponse du moteur
+(event response).
+On ajoute l'event a la queue locale.

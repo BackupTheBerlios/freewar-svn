@@ -1,0 +1,17 @@
+#########################
+#  BUGS :
+#########################
+
+L'affichage des entitees sur une surface, se fait dans l'ordre de creation
+des sprites.
+Il faudra eventuellement implementer une valeur de profondeur a la creation
+des entitees (ou a leur "edit").
+
+######
+
+La fonction "update_surf" agit sur les parametres mini et maxi comme suit:
+
+ mini < profondeur affichees <= maxi.
+
+
+######

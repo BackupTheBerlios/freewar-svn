@@ -1,0 +1,194 @@
+####################
+# PLANNING FREEWAR #
+####################
+
+mailing liste de prof : labconsole2004-prof@yahoogroups.com
+
+- suivi lab console: 4 mai 13h20 > ok
+- suivi lab console: 3 juin 10h30 > ok
+- suivi lab console: 17 juin > a voir ^^
+
+cat : ribas_j
+dooms : huot_j
+neo : petitc_s
+drax : skondr_m
+
+###################################
+## DERNIER PLANNING =)
+#cat :
+     -changement d'actions. // done
+     -free du path // done
+     -manage -> timer // done
+     -gettimeofday -> SDL_Ticks // done
+     -range // done
+     -dammages // done
+     -rof // done
+     -appeller get_speed // done
+#dooms :
+     -envoyer l'appartenance du joueur au debut. // done
+     -layers. // done
+     -couche reseaux. // done
+#neo :
+     -gerer l'appartenance o niveau du jeu. // done
+     -get_speed. //done
+     -mouse press. //done
+     -se toucher les couilles //en cours
+
+## EH NON
+
+bugs:
+	- req_edit_arena_surface (coté moteur et AFC)
+	- teleportation quand ecrasage de mouvement
+	- multi-menu dans le header de menu.xml
+	- collision/pathfinding prend pas en compte la taille de l'image // done
+	- taille de la selection graphique des unites fixe
+
+###################################
+## planning du 6juin -> 13juin
+#
+# cat:
+  - zappy:				2j
+  - la gestion des actions des entitees:2j
+  - action attaque de truite		3j
+# dooms:
+  - zappy:				2j
+  - coder dialogue jeu -> moteur	^
+  - peche la truite			5j
+# neo:
+  - creer le createur/loader de package	2j // fini
+  - trouver les sprites			2j // fini
+  - debugg moteur son			1j // ?
+  - console				2j // ?
+  - reinstaller son pc			2j // en cours
+# drax:
+  - dialogue jeu -> moteur avec dooms	2j // toujours rien
+  - skelette				2j // toujours rien 
+  - hud					1j // toujours rien
+  - nous montrer le skelette :)		0.5j//toujours rien
+  - skelette reseaux, gestion d'actions
+    et pas d'attente active		1.5j//toujours rien
+#
+##
+###################################
+## planning du 13juin -> 20juin
+#
+# cat:
+  - event				1j
+  - inscription				1j
+  - actions				2j
+  - zappy				3j
+# dooms:
+  - afirstchaos:			4j
+    - affichage			1j
+    - dialogue event hud	1j
+    - dialogue actions		2j
+  - zappy				3j
+# neo:
+  - envoyer le code a dooms		!!
+  - moteur son				??
+  - console				??
+# drax:
+  - client zappy (IA)			7j
+#
+##
+####################################
+#	      TACHES:		   #
+####################################
+# engine freewar (dooms & cat):
+- etude du moteur pour les 
+  implementations necessaires:		done
+- squelette moteur + tests sommaire:	done
+- gestion du stockage des information:	done
+- gestion du stockage des entitees:	done
+# actions (cat):
+- la gestion des actions des entitees:	dome
+- gestion de la construction d'entites
+- integration du path 
+  finding dans le moteur + deplacement	done
+- gerer la recolte / attaque:		en cours
+- debug du moteur ...			bcp de j :)
+
+# reseau (dooms):
+- etude du moteur reseau:		done
+- etablir un protocol reseau:		done
+- codage du moteur server reseau:	done
+- codage du client reseau:		done
+- test & debug client + server		done
+- regarder l'histoire du zappy		done
+- explication de cat du moteur		done
+- integration du server/client au
+  moteur avec cat:			done
+- coder dialogue jeu -> moteur		2j 
+
+
+# graphique (neo) :
+- etude du moteur graphique:		done
+- codage du moteur graphique:
+  - menu				done // a finir, un jour
+  - jeu					done
+- test & debug:				done
+- integration du moteur graphique:	done
+- chercher et adaptater des graf 2d	2j // done
+# divers
+- mode console				1j // en cours
+
+# son (neo) :
+- etude du moteur sonore + doc:		done
+- coder le moteur sonore:		1j // en cours
+- test du moteur sonore + debug:	^
+- integration du moteur sonore:		1j // en cours
+
+# jeu (drax) :
+- etude du jeu a first chaos:		done
+- creation de xml menu avec neo:	done
+- creation de la doc du jeu_menu	done
+- creation du jeu_menu			done // ou pas
+- coder le jeu				5j // en cours
+- test & debug				2j // en cours
+- integration du jeu			2j // en cours
+
+# divers: 
+- fonction qu'y permette d'upgrader
+  la bdd d'un client			1j
+- fonction qu'y permette d'upgrader	|--> le meme jour
+  le jeu + bdd et le moteur		1j
+- serveur dedier:			5j
+- valeurs par defaut de tous les
+  fichiers de conf			5j
+- maps					done
+- xml pour les lands			done
+- creation de la base de donnee:	2j
+- documentation du jeu, avec toute
+  la gestion des events / HUD		2j
+
+# IA :
+- etude + doc sur l'IA simple
+  des unitess				1j
+- reunion d'equipe pour l'IA		une ou 2h 
+- rajouter cette IA au jeu:		3j
+- test & debug de l'IA			3j
+########
+
+##################
+# horaires quotidiens A L'ECOLE:
+#
+# de 10h a 19h 6j/7j
+#
+# reunion tous les dimanches
+#
+##################
+
+# important pour freewar:
+
+- BACKUP BACKUP BACKUP BACKUP BACKUP BACKUP !!!!
+- toujours tester avec un top ouvert
+- faut rusher !
+### NEW ###
+- le planning est a discuter avant, il faut respecter scrupuleseument
+  le planning, quitte a ne PAS finir les taches commencees.
+###########
+
+#################
+# autres projets:
+- trade: 26juin: done
+- zappy: 20juin: // en cours

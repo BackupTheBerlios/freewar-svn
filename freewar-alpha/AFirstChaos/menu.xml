@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<!-- Define defaults to be applied here -->
+	<head>
+		<defaults>
+			<default type="button" sprite="img/menu/button.png" text_font="shagade.ttf" text_color="#0000FF" text_size="12"/>
+			<default type="text" text_font="shagade.ttf" text_color="#0000FF" text_size="12" background="#FFFFFF"/>
+			<default type="list" left_sprite="img/menu/left.png" right_sprite="img/menu/right.png" text_font="shagade.ttf" text_color="#0000FF" text_size="12" background="#FFFFFF"/>
+			<default type="image"/>
+			<default type="box" sprite="img/menu/box.png" text_font="shagade.ttf" text_color="#0000FF" text_size="12" background="#FFFFFF"/>
+			<default type="table" background="#FFFFFF"/>
+		</defaults>
+		<menu name="game_menu">
+			<entity type="image" uid="map" x="200" y="140"/>
+			<entity type="list" uid="map_name" x="200" y="200"/>
+			<entity type="list" uid="ressources" x="200" y="260"/>
+			<entity type="list" uid="maxplayers" x="200" y="380"/>
+			<entity type="table" uid="players" x="0" y="140" height="200" width="400" title="Player List">
+				<entity type="col" value="name" width="0.25"/>
+				<entity type="col" value="race" width="0.25"/>
+				<entity type="col" value="color" width="0.20"/>
+				<entity type="col" value="team" width="0.25"/>
+				<entity type="col" value="md5" width="0.05"/>
+			</entity>
+			<entity type="text" uid="server_hostname" x="142" y="250" value="10.251.3.56" text_size="16" background="FF0000"/>
+			<entity type="text" uid="server_port" x="142" y="300" value="42612" text_size="16" background="FF0000"/>
+			<entity type="button" uid="start" x="660" y="550" sprite="img/menu/play.png" value="Start Game" text_size="20"/>
+			<entity type="button" uid="back" x="0" y="550" sprite="img/menu/back.png" value="Back" text_size="20"/>
+		</menu>
+	</head>
+<!-- Define <menu>'s in the <head> section and give them a name to be able to use them -->
+<!-- here. -->
+	<menu type="button" uid="play" x="350" y="140" value="Play" text_size="20">
+		<entity type="table" uid="foundservers" x="0" y="140" height="200" width="400" title="Server List"/>
+		<menu type="button" uid="create_game" x="650" y="140" value="Host Game" text_size="20">
+			<menu name="game_menu" id="server"/>
+		</menu>
+		<menu type="button" uid="join_game" x="650" y="200" value="Join Game" text_size="20">
+			<menu name="game_menu" id="client"/>
+		</menu>
+		<menu type="button" uid="specify_game" x="142" y="550" value="Manual IP:Port" text_size="20">
+			<menu name="game_menu" id="client"/>
+		</menu>
+		<entity type="button" uid="refresh" x="650" y="260" value="Refresh List" text_size="20"/>
+		<entity type="button" uid="back" x="0" y="550" value="Back" text_size="20"/>
+	</menu>
+	<menu type="button" uid="options" x="350" y="200" value="Options" text_size="20">
+		<menu type="button" uid="display" x="350" y="140" value="Display" text_size="20">
+			<entity type="list" uid="resolution" x="350" y="140"/>
+			<entity type="list" uid="display_mode" x="350" y="200"/>
+			<entity type="button" uid="back" x="0" y="550" sprite="img/menu/back.png" value="Back" text_size="20"/>
+		</menu>
+		<menu type="button" uid="sound" x="350" y="200" value="Sound" text_size="20">
+			<entity type="list" uid="vol_music" x="350" y="140"/>
+			<entity type="list" uid="vol_fx" x="350" y="200"/>
+			<entity type="button" uid="back" x="0" y="550" sprite="img/menu/back.png" value="Back" text_size="20"/>
+		</menu>
+		<menu type="button" uid="network" x="350" y="260" value="Network" text_size="20">
+			<entity type="list" uid="net_interfaces"/>
+			<entity type="button" uid="back" x="0" y="550" sprite="img/menu/back.png" value="Back" text_size="20"/>
+		</menu>
+		<menu type="button" uid="keyboard" x="350" y="320" sprite="img/menu/keyboard-mouse.png" value="Keyboard" text_size="20">
+			<entity type="button" uid="back" x="0" y="550" sprite="img/menu/back.png"  value="Back" text_size="20"/>
+		</menu>
+		<entity type="button" uid="back" x="0" y="550" sprite="img/menu/back.png" value="Back" text_size="20"/>
+	</menu>
+	<entity type="button" uid="credits" x="660" y="550" sprite="img/menu/credits.png" value="Credits" text_size="20"/>
+	<entity type="button" uid="exit" x="0" y="550" sprite="img/menu/exit.png" value="Exit" text_size="20"/>
+	<entity type="button" uid="test" x="0" y="42" value="Test" text_size="20"/>
+</root>

@@ -1,0 +1,44 @@
+----------- Pathfinding --------------
+
+L'algorithme de pathfinding consiste a determiner le chemin
+le moins couteux pour aller d'un point a un autre.
+Le chemin le moins couteux n'etant pas forcement le plus court
+(temps, distance).
+
+On attribue a chaque case, un cout. Ce cout est le "prix a payer"
+pour traverser/stationner sur cette case.
+Concretement, le cout est un facteur multiplicateur.
+
+le chiffre le plus petit (1) etant le cout le moins cher (air, terre, chemin libre).
+le chiffre le plus grand (9) etant le cout le plus cher (mur, montagne),.
+Entre ces deux extremes apparaitront des subtilitees (2-8) par exemple
+du sable, de l'eau, du fog of war, une unite existante amie, etc.
+
+Le chemin ideal est donc celui dont la somme des couts de
+passage sur toutes les cases le composant, est la plus petite.
+
+Lorsque l'on fait apel au pathfinding, les parametres suivant sont transmis:
+- Coordonees du point de depart
+- Coordonees du point d'arrive.
+- Map
+
+
+Pour trouver le chemin le moins onereux
+on procede aux etapes suivantes:
+
+<a revoir par stef pour le dossier>
+	On part du point de depart et on regarde autour de soi. Concretement,
+on calcul le cout du trajet de la case ou nous nous situons, jusqua la case
+d'a cote. On a donc 8 <le chat:et pas 9, hein mael...^^/ effectivement... :)> choix au maximum.
+
+	Ces 8 "trajets" sont nos trajet potentiels. Nous choisirons le moins
+couteux des 8, et avancerons sur cette case.
+	
+	Le choix du trajet, necessitera de calculer les 4 parametres
+suivants:
+  - Le cout du trajet depuis le point de depart et cette case.
+  - Le cout du trajet depuis le point d'arrive et cette case.
+  - Le cout total du trajet (somme des deux parametres precedent);
+  - Le trajet ideal depuis le point de depart, pour arriver a cette case
+  (liste de coordonees).
+</a revoir par stef pour le dossier>

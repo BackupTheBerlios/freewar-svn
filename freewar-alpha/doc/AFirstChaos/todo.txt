@@ -1,0 +1,6 @@
+- in menu.xml, parse <default> tags, and fill struct					//done
+
+- code a minimal set of uidfunc for a functional game					//done
+
+- add a section in menu.xml (defaults) which describses the background and parse	//done
+

@@ -1,0 +1,20 @@
+#############
+#pak sprites:
+
+header
+{
+	moveleft, sizex 14, sizey 20;
+	moveright,..;
+	attack,..
+	..
+}
+
+# |  le sprite moveleft de size 14/20
+# v
+)^_(_)(%@_)%!@(#!@_)(!@#!@%3
+@%!%!@%@$_)%@%$_)!@%$(
+
+# | le sprite moveright ....
+# v
+
+...
