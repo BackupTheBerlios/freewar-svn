@@ -1,0 +1,40 @@
+La map ne sera PAS en xml, mais en binaire (donc
+on devra la faire avec un editeur)
+
+format:
+
+// unsigned short
+width
+height
+
+// unsigned short
+nb_players
+
+// unsigned short (coordonnes de depart des joueurs)
+x
+y
+... nb_players fois
+
+
+// unsigned int
+
+id_entity_terrain
+id_entity_entity    (arbre, mine d'or, squelettes, .. )
+... width * height fois
+
+
+###|
+#| facon dont est stocker la map avec les entitees en memoire:
+
+t_scale		tab[x][y]; < map
+
+struct		s_scale
+{
+ t_entity	*land;
+
+ t_entity 	*tab[MAX];
+ t_entity_efem  *tab_ephemere[MAX_EPHEM]; // les entity ephemeres
+ t_coord	coord[MAX];
+ int		fog[NB_PLAYER]; // qui est en fonction de la map
+ // fog-> 0:je voi 1:je voi plus 2:c'est noir comme dans mon c.. (sans les pwals)
+}		t_scale;

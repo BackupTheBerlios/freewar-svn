@@ -1,0 +1,124 @@
+#################
+# FONCTIONNEMENT
+
+connection :
+
+(jeu_serveur)--interprocess---(moteur_server)
+				|
+				|
+				|
+				|
+			ethernet_fois_n_joueurs
+				|
+				|
+				|
+				|
+(jeu_client)---interprocess---(moteur_client)
+
+
+01/ le moteur se lance.
+
+02/ le moteur charge la base de donnee du jeu qui va comprendre toutes les informations
+    necessaires du genre: toutes les entitees (unitees, batiments, sorts, armes, terrain ..),
+    settings du jeu, les maps et le chemin des sons, et des sprites.
+
+03/ le moteur lance le jeu.
+
+04/ le moteur envoi au jeu une liste de tout ce qu'il a pu lire dans la base de donnees
+    (genre les maps/races/options disponibles ..), le jeu (ou une partie annexe) va s'occuper
+    du lancement d'une partie en donnant tous les choix possibles au joueur.
+
+05/ une fois la partie lancee par le joueur, le jeu envoi tous les caracteristiques de la partie
+    cree au moteur. (map selectionnee, nbr de joueurs, les races, type de jeu, les teams...)
+
+(si un autre joueur rejoint la partie, c'est les 2 moteurs seulement qui pourront communiquer.)
+
+
+====== LA PARTIE SE LANCE ======
+================================
+
+##ce que le jeu va gerer:
+ -toute la partie gamespace.
+ -les evenements (capture et interpretation).
+ -les actions qui decoulent de ces evenements.
+ -ordre au moteur de
+	-lancement de sons
+	-creation d'entitees
+	-modification d'etat/action des entitees
+	-...
+
+##ce que le moteur va gerer au niveau server:
+ -toute la gestion du temps reel.
+ -creation et gestion des entitees existantes a travers le temps.
+ -affichage du jeu suivant le gamespace.
+ -le lancement de sons.
+ -la partie reseau.
+ -toutes les stats.
+ -les ressources du joueur. (gold, food ...)
+ -les maps.
+ -le fog of war.
+ -les requetes recues du jeu (cf : "requetes possible vers le moteur")
+ -queues d'actions sur les entitees
+
+##ce que le moteur va gerer au niveau client:
+ -bridge vers le moteur server
+ -dc bien sur la partie reseau
+ -l'affichage
+ -les sons
+
+
+##########################
+# details concernant les 
+# interaction entre les
+#  differentes parties
+
+-le moteur server lancera pour chaque joueur les informations necessaire
+ qu'il a besoi pour son affichage a l'ecran apres avoir recu genre le rect
+ de ce que ve le jeu pour afficher.
+-pareil pour les sons, le moteur server balancera des requetes sur tous les
+ moteur server des joueur des requetes pour lancer les sons necessaires.
+-le jeu faudra qu'il ne soit pa blocant, qu'il n'attendent pa la reponse des
+ requettes qu'il fait au moteur server, surtout si c'est le client !
+-le jeu et le moteur devront etre synchroniser avec le meme fps !
+ le mieu je pense, c'est que genre a la fin d'une frame, le moteur envoie
+ une requette au jeu client pour que ce dernier envoie toutes les requettes
+ dont il a besoin qu'il a bufeuriser depuis le dernirer cycle. (si c pa clair,
+ jexplike =)
+-a ce sujet, definir un nombre maximal de requetes par frame.
+
+####################################
+# idee rapide de ce que
+# sera le skelette du moteur server:
+while (jai pa perdu =)
+{
+- reset_timer
+- une boucle pour gerer toutes les requettes de tous les players
+  et d'y repondre.
+- gestion des entitees, boucle qui va faire toutes les actions necessaires ..
+  mouvements, attaques, construction etc ..
+- une boucle pour donner les elements necessaire a l'affichage pour chaque joueurs.
+- une boucle pour envoyer l'ordre des sons a jouer a tous les joueurs.
+- timer_wait
+- synchro players
+}
+
+##############
+# IDEES
+
+-le game space sera charge au debut du lancement du moteur (conf par defaut).
+ le jeu poura apres, si necessaire, envoyer au moteur la configuration exacte du gamespace
+ (ou du moins, d'une partie) qu'il voudra changer. (le tout pourra se faire dynamiquement au
+ cours du jeu.)
+
+-dans le jeu, pkoi pas faire un lancement de son aléatoire pour une action donnee pour differents
+ facteurs, comme le son propre de l'unitee, son action demandee, le temps (jour/nuit), sa vie,
+ le type de terrain surlequel elle se trouve etc etc ...
+
+-gerer genre 3 (voir bcp plus) plan de jeu, comme par exemple, le plan normal (la terre), l'air (ou
+ ne pouront aller que les unitees volantes), et sous terre/mer (pour ou genre les soumarins,
+ et les tunels ...). Avoir également un HUD différent pour chaque plan par exemple.
+
+-pour une version future du moteur: gere l'ajout d'une action au DEBUT de la queue d'action d'une
+ entitee.
+##############
+

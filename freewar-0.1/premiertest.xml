@@ -1,0 +1,462 @@
+// Copyright (C) 2004 Freewar Team <doomsday@freewar.net>
+
+// This file is part of Freewar.
+
+// Freewar is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+
+// Freewar is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with Freewar; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<!-- Game database -->
+
+<!-- ###################### -->
+<!-- # Test of DB V.01    # -->
+<!-- ###################### -->
+
+<root>
+	<head>
+		<version bdd_name="A First Chaos" bdd_verion="0.1"/>
+	</head>
+<!--=====================================================================-->
+	<races>
+		<race name="human" files="races/human/" max_units="255"/>
+		<race name="undead" files="races/undead/" max_units="255"/>
+	</races>
+<!--=====================================================================-->
+	<maps>
+		<map name="map_2" max_players="2"/>
+		<map name="map_4" max_players="4"/>
+		<map name="map_8" max_players="8"/>
+	</maps>
+<!--=====================================================================-->
+	<game>
+		<prices value="1"/> <!-- facteur multiplicateur des prix -->
+		<max_players value="12"/>
+		<speed value="10"/>
+	</game>
+<!--=========================================================================-->
+	<network>
+		<timeout value="10"/>  <!-- mili-seconds -->
+	</network>
+<!--=========================================================================-->
+	<index type="lands" name="grass"/>
+	<index type="lands" name="rain"/>
+	<index type="lands" name="rock"/>
+	<index type="lands" name="mountain"/>
+	<index type="lands" name="snow"/>
+	<index type="lands" name="swamp"/>
+	<index type="lands" name="sand"/>
+	<index type="lands" name="river"/>
+	<index type="lands" name="sea"/>
+	<index type="meters" name="wood"/>
+	<index type="meters" name="food"/>
+	<index type="meters" name="stone"/>
+	<index type="meters" name="iron"/>
+	<index type="meters" name="time"/>
+	<index type="armors" name="plate"/>
+	<index type="armors" name="skin"/>
+	<index type="armors" name="wall"/>
+	<index type="weapons" name="sword"/>
+	<index type="weapons" name="pick"/>
+	<index type="types" name="infantry"/>
+	<index type="types" name="civil"/>
+	<index type="types" name="seaboats"/>
+	<index type="types" name="air"/>
+	<index type="types" name="mobile"/>
+	<index type="types" name="soldier"/>
+	<index type="types" name="buildings"/>
+	<index type="layers" name="ground"/>
+	<index type="layers" name="air"/>
+	<index type="entities" name="peon"/>
+	<index type="entities" name="footman"/>
+	<index type="entities" name="vulture"/>
+	<index type="entities" name="phoenix"/>
+	<index type="entities" name="dropship"/>
+	<index type="entities" name="corpse"/>
+	<index type="entities" name="town-hall"/>
+<!--=====================================================================-->
+	<layers>
+		<layer name="ground" depth="0"/>
+		<layer name="air" depth="1"/>
+	</layers>
+<!--=====================================================================-->
+	<meters>
+		<meter name="wood"/>
+		<meter name="food"/>
+		<meter name="stone"/>
+		<meter name="blood"/>
+		<meter type="global" name="time" rr="10" is="1"/>
+	</meters>
+<!--=====================================================================-->
+	<lands>
+		<land idmapedit="1" name="grass" sprite="src/img/grass.bmp"/>
+		<land idmapedit="843" name="rain" sprite="src/img/rain.bmp"/>
+		<land idmapedit="848" name="rock" sprite="src/img/rock.bmp"/>
+		<land idmapedit="849" name="mountain" sprite="src/img/mountain.bmp"/>
+		<land idmapedit="844" name="snow" sprite="src/img/snow.bmp"/>
+		<land idmapedit="846" name="swamp" sprite="src/img/swamp.bmp"/>
+		<land idmapedit="845" name="sand" sprite="src/img/sand.bmp"/>
+		<land idmapedit="847" name="river" sprite="src/img/river.bmp"/>
+		<land idmapedit="850" name="sea" sprite="src/img/sea.bmp"/>
+	</lands>
+<!--=====================================================================-->
+	<type name="infantery">
+		<speed>
+			<surface>
+				<factor name="mountain" value="5.5"/>
+				<factor name="sand" value="5.5"/>
+				<factor name="snow" value="5.5"/>
+				<factor name="grass" value="0.2"/>
+			</surface>
+		</speed>
+<!--		<visibility>-->
+<!--			<time>-->
+<!--				<factor name="night" value="0.6"/>-->
+<!--			</time>-->
+<!--		</visibility>-->
+	</type>
+
+	<type name="civil">
+		<speed>
+			<surface>
+				<factor name="mountain" value="5.7"/>
+				<factor name="sand" value="5.7"/>
+				<factor name="snow" value="5.7"/>
+			</surface>
+		</speed>
+	</type>
+	<type name="seaboat">
+		<speed>
+			<surface>
+				<factor name="sea" value="0.8"/>
+				<factor name="river" value="1.0"/>
+			</surface>
+		</speed>
+	</type>
+	<type name="air">
+		<speed>
+			<surface>
+				<factor name="mountain" value="1.0"/>
+				<factor name="sand" value="1.0"/>
+				<factor name="snow" value="1.0"/>
+				<factor name="grass" value="1.0"/>
+				<factor name="rain" value="1.0"/>
+				<factor name="rock" value="1.0"/>
+				<factor name="river" value="1.0"/>
+				<factor name="mountain" value="1.0"/>
+				<factor name="swamp" value="1.0"/>
+			</surface>
+		</speed>
+	</type>
+	<type name="mobile">
+		<speed>
+			<surface>
+				<factor name="grass" value="1.0"/>
+				<factor name="river" value="1.0"/>
+				<factor name="rain" value="1.0"/>
+			</surface>
+		</speed>
+	</type>
+	<type name="soldier">
+		<speed>
+			<surface>
+				<factor name="snow" value="0.7"/>
+				<factor name="sand" value="0.4"/>
+				<factor name="mountain" value="0.5"/>
+				<factor name="swamp" value="0.3"/>
+				<factor name="rock" value="0.8"/>
+			</surface>
+		</speed>
+		<visibility>
+			<time>
+				<factor name="day" value="1.4"/>
+			</time>
+		</visibility>
+	</type>
+	<type name="buildings">
+	</type>
+<!--=====================================================================-->
+	<instant>
+	</instant>
+<!--=====================================================================-->
+	<weapons>
+		<weapon name="sword" damage="15" rof="5" range="5">
+			<types> <!-- types contre lequels l'arme peut attaquer -->
+				<type name="infantery"/>
+			</types>
+		</weapon>
+		<weapon name="pick" damage="5" rof="3" range="1">
+			<types> <!-- types contre lequels l'arme peut attaquer -->
+				<type name="infantery"/>
+			</types>
+		</weapon>
+	</weapons>
+<!--=====================================================================-->
+	<armors>
+		<armor name="skin" value="10">
+			<types> <!-- types contre lequels l'armure peut defendre -->
+				<type name="infantery" value="0.5"/>
+			</types>
+		</armor>
+		<armor name="plate" value="15">
+			<types>
+				<type name="infantery" value="1.0"/>
+			</types>
+		</armor>
+		<armor name="wall" value="30">
+			<types>
+				<type name="infantery" value="0.6"/>
+			</types>
+		</armor>
+	</armors>
+<!--=====================================================================-->
+	<entity idmapedit="1842" name="peon" sprite="sprite_package/medic.spk">
+		<types>
+			<type name="infantery"/>
+			<type name="civil"/>
+		</types>
+		<layers>
+			<layer name="ground"/>
+		</layers>
+		<visibility warfog="1"/> <!-- si on vois l'enitee derriere le brouillard de guerre gris -->
+		<costs> <!-- ressources consomees (on decremente les compteurs correspondants) -->
+			<cost type="global" name="food" value="50"/> 
+			<cost type="global" name="people" value="1"/>
+		</costs>
+		<meters>
+			<meter name="life" value="50" kv="0"/>
+			<meter name="stamina" value="100" rr="5" is="5"/>
+			<meter name="perso_wood" value="0" max="10"/>
+			<meter name="perso_stone" value="0" max="10"/>
+			<meter name="perso_food" value="0" max="10"/>
+		</meters>
+		<armors>
+			<armor name="skin"/>
+		</armors>
+		<weapons>
+			<weapon name="pick"/>
+		</weapons>
+		<actions>
+			<move speed="42" sprite="sprite_package/medic_mov.spk"/>
+			<died sprite="sprite_package/medic_die.spk" taunt="peon_died.tpk">
+				<!-- liste d'actions a faire a sa mort -->
+				<transform new_entity="corpse"/>
+			</died>
+			<attack sprite="sprite_package/medic_attac.spk">
+				<entity type="peon" speed="1"/>
+				<entity type="footman" speed="1"/>
+			</attack>
+		</actions>
+	</entity>
+
+	<entity idmapedit="1843" name="footman" sprite="sprite_package/marine.spk"> <!-- ceci est un exemple d'entitee -->
+		<types>
+			<type name="infantery"/> <!-- value={infantry,mitraill,allied} -->
+			<type name="soldier"/>
+		</types>
+		<layers>
+			<layer name="ground"/>
+		</layers>
+		<visibility warfog="1"/> <!-- si on vois l'enitee derriere le brouillard de guerre gris -->
+		<costs> <!-- ressources consomees (on decremente les compteurs correspondants) -->
+			<cost type="global" name="food" value="80"/> 
+			<cost type="global" name="wood" value="30"/>
+			<!-- certaines races pourront consommer un ou plusieurs -->
+			<!-- "pilote(s)" par unitee construite par exemple -->
+		</costs>
+		<meters>
+			<meter name="life" value="100" kv="0"/>
+			<meter name="stamina" value="100" rr="5" is="10"/>
+			<!-- dans le cas d'un eclair: -->
+			<!--	<meter name="timetolive" value="0" rr="10" is="1" kv="5" die_if_null="1"> -->
+		</meters>
+
+		<armors>
+			<armor name="plate"/>
+		</armors>
+		<weapons>
+			<weapon name="sword"/>
+		</weapons>
+		<actions>
+			<move speed="69" sprite="sprite_package/marine_move.spk"/>
+			<died>
+				<transform new_entity="corpse"/>
+				<!-- list d'actions a faire a sa mort -->
+			</died>
+			<attack sprite="sprite_package/marine_attac.spk">
+				<entity type="peon" speed="1"/>
+				<entity type="footman" speed="1"/>
+				<entity type="vulture" speed="1"/>
+			</attack>
+			<defend/>
+			<guard/>
+			<follow/>
+			<patrol/>
+		</actions>
+	</entity>
+	<entity idmapedit="1843" name="vulture" sprite="sprite_package/vulture.spk">
+		<types>
+			<type name="mobile"/>
+		</types>
+		<layers>
+			<layer name="ground"/>
+		</layers>
+		<visibility warfog="1"/>
+		<costs>
+			<cost type="global" name="food" value="80"/> 
+			<cost type="global" name="wood" value="30"/>
+		</costs>
+		<meters>
+			<meter name="life" value="100" kv="0"/>
+			<meter name="fuel" value="100" rr="5" is="-10"/>
+		</meters>
+
+		<armors>
+			<armor name="plate"/>
+		</armors>
+		<weapons>
+			<weapon name="sword"/>
+		</weapons>
+		<actions>
+			<move speed="169" sprite="sprite_package/vulture.spk"/>
+			<died>
+				<transform new_entity="corpse"/>
+			</died>
+			<attack sprite="sprite_package/vulture.spk">
+				<entity type="peon" speed="1"/>
+			</attack>
+			<defend/>
+			<guard/>
+			<follow/>
+			<patrol/>
+		</actions>
+	</entity>
+	<entity idmapedit="1844" name="phoenix" sprite="sprite_package/phoenix.spk">
+		<types>
+			<type name="air"/>
+		</types>
+		<layers>
+			<layer name="air"/>
+		</layers>
+		<visibility warfog="1"/> <!-- si on vois l'enitee derriere le brouillard de guerre gris -->
+		<costs> <!-- ressources consomees (on decremente les compteurs correspondants) -->
+			<cost type="global" name="food" value="800"/> 
+			<cost type="global" name="wood" value="300"/>
+			<!-- certaines races pourront consommer un ou plusieurs -->
+			<!-- "pilote(s)" par unitee construite par exemple -->
+		</costs>
+		<meters>
+			<meter name="life" value="100" kv="0"/>
+			<meter name="fuel" value="100" rr="5" is="-1"/>
+		</meters>
+		<armors>
+			<armor name="plate"/>
+		</armors>
+		<weapons>
+			<weapon name="sword"/>
+		</weapons>
+		<actions>
+			<move speed="69" sprite="sprite_package/phoenix.spk"/>
+			<attack sprite="sprite_package/phoenix.spk">
+				<entity type="phoenix" speed="1"/>
+				<entity type="dropship" speed="1"/>
+				<entity type="peon" speed="1"/>
+				<entity type="footman" speed="1"/>
+			</attack>
+			<died>
+				<transform new_entity="corpse"/>
+				<!-- list d'actions a faire a sa mort -->
+			</died>
+		</actions>
+	</entity>
+	<entity idmapedit="1845" name="dropship" sprite="sprite_package/dropship.spk">
+		<types>
+			<type name="seaboat"/>
+		</types>
+		<layers>
+			<layer name="ground"/>
+		</layers>
+		<visibility warfog="1"/> <!-- si on vois l'enitee derriere le brouillard de guerre gris -->
+		<costs> <!-- ressources consomees (on decremente les compteurs correspondants) -->
+			<cost type="global" name="food" value="800"/> 
+			<cost type="global" name="wood" value="300"/>
+			<!-- certaines races pourront consommer un ou plusieurs -->
+			<!-- "pilote(s)" par unitee construite par exemple -->
+		</costs>
+		<meters>
+			<meter name="life" value="100" kv="0"/>
+			<meter name="fuel" value="100" rr="5" is="-1"/>
+		</meters>
+
+		<armors>
+			<armor name="plate"/>
+		</armors>
+		<weapons>
+			<weapon name="sword"/>
+		</weapons>
+		<actions>
+			<move speed="69" sprite="sprite_package/dropship.spk"/>
+			<attack sprite="sprite_package/dropship.spk">
+			</attack>
+			<died>
+				<transform new_entity="corpse"/>
+				<!-- list d'actions a faire a sa mort -->
+			</died>
+		</actions>
+	</entity>
+	<entity name="corpse" sprite="MapEditor/img/bonhomme.png">
+		<types>
+			<type name="soldier"/>
+		</types>
+		<layers>
+			<layer name="ground"/>
+		</layers>
+		<visibility warfog="0"/>
+		<meters>
+			<meter name="life" value="500" kv="0"/>
+			<meter name="timetolive" value="150" rr="10" is="-10" kv="0"/>
+		</meters>
+	</entity>
+	<entity idmapedit="1844" name="town-hall" sprite="sprite_package/academy.spk" max="50">
+		<types>
+			<type name="buildings"/>
+		</types>
+		<layers>
+			<layer name="ground"/>
+		</layers>
+		<visibility warfog="1"/>
+		<meters>
+			<meter name="life" value="500" kv="0"/>
+		</meters>
+
+		<armors>
+			<armor name="wall"/>
+		</armors>
+		<actions>
+			<create> <!-- sprite="src/img/..">-->
+				<entity name="peon" time_to_make="10">
+					<costs>
+						<cost name="food" value="50" prealeave_time="0"/>
+					</costs>
+				</entity>
+				<entity name="footman" time_to_make="30">
+					<costs>
+						<cost name="food" value="50" prealeave_time="0"/>
+						<cost name="wood" value="20" prealeave_time="0"/>
+					</costs>
+				</entity>
+			</create>
+			<attack sprite="sprite_package/academy.spk">
+			</attack>
+		</actions>
+	</entity>
+<!--=====================================================================-->
+</root>

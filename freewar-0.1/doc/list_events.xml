@@ -1,0 +1,114 @@
+// Copyright (C) 2004 Freewar Team <doomsday@freewar.net>
+
+// This file is part of Freewar.
+
+// Freewar is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+
+// Freewar is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with Freewar; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<!-- exemple de la syntax du fichier events.conf: -->
+
+<context name="context" herit="true"> // herit (bool) informe si un bind doit
+									  // être utilisé sur tous les contexts
+									  // concernés (true) ou pas (false).
+									  // Ex:
+									  // le contexte "units" est implicitement
+									  // dans le contexte "battleground".
+
+	<mousebind button="button" action="interaction">
+		ACTIONS
+	</mousebind>
+
+	<keybind key="KEY COMBO">
+		ACTIONS
+	</keybind>
+
+	<!-- like emacs -->
+	<keybind key="C-x">
+		<keybind key="f">
+			ACTIONS
+		</keybind>
+	</keybind>
+
+	<!-- combo en profondeur mouse/keyboard -->
+	<keybind key="C">
+		<mousebind button="button" action="interaction">
+			ACTIONS
+		</mousebind>
+	</keybind>
+	
+</context>
+
+<!-- Liste non-exhausive des contexts -->
+
+- Frame				// n'importe ou dans la fenetre principale
+- HUD
+- HUD_button
+- minimap
+- battleground
+- units				// toutes les unités
+- units_friend
+- units_ennemy
+- units_owned
+
+	<!-- des contextes pourront etre dynamiquement générés en fonction
+		 du .xml définissant le jeu (rajouter context="name_of_context"
+		 dans la balise souhaité par exemple). Ne peux pas être utilisé
+		 sur toutes les balises. Ici, des types et des actions: -->
+		
+- tank  
+- infanterie
+- recolter
+- attaquer
+- bouger
+
+<!-- Liste non-exhausive des interactions
+	(Specifies what you are doing with your mouse/keyboard for the binding)-->
+
+- Press
+- Release
+- Click (press and release quickly)
+- DoubleClick
+- Drag
+
+<!-- Liste non-exhausive des actions -->
+	<!-- syntax -->
+	<action name="NAME">PARAMETERS</action>
+
+<!-- TODO: Penser à plein d'actions graphiques -->	
+
+- Select <!-- une initialisation de selection sera dans le .xml (plus bas)-->
+	<!-- parametres -->
+	
+- Attack
+	<!-- parametres -->
+	
+- Move
+	<!-- parametres -->
+	
+- Execute <!-- pour executer l'action associé à un bouton du HUD par ex -->
+	<!-- parametres -->
+	<location value="onOver"/>
+
+- Cursor <!-- pour changer de curseur -->
+
+- ..
+
+<!-- une selection par default sera presente, intitulé "default"-->
+<!-- <select>default</select>-->
+<selects number="4">
+	<select>one</select>
+	<select>two</select>
+	<select>attack</select> 
+	<select>peon</select>	<!-- les noms des selections pourra eventuellement
+								 etre affiché -->
+</selects>

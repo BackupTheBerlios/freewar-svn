@@ -1,0 +1,266 @@
+// Copyright (C) 2004 Freewar Team <doomsday@freewar.net>
+
+// This file is part of Freewar.
+
+// Freewar is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+
+// Freewar is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with Freewar; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+<!-- Game database -->
+
+<!-- ###################### -->
+<!-- # Exemple of DB V.01 # -->
+<!-- ###################### -->
+
+<!-- meters usage:		-->
+<!-- rr: regeneratio rate	-->
+<!-- is: incrementation size	-->
+<!-- sr: seuil regeneration	-->
+<!-- sx: seuil max		-->
+<!-- kv: kill value		-->
+<!-- min:min			-->
+<!-- max:max			-->
+<!-- value:valie		-->
+
+<root>
+<!--=====================================================================-->
+	<head>
+		<version db_name="A First Chaos" db_verion="0.1"/>
+	</head>
+<!--=====================================================================-->
+	<races>
+		<race name="human" files="races/human/" max_units="255"/>
+		<race name="undead" files="races/undead/" max_units="255"/>
+	</races>
+<!--=====================================================================-->
+	<maps>
+		<map name="map_2" max_players="2"/>
+		<map name="map_4" max_players="4"/>
+		<map name="map_8" max_players="8"/>
+	</maps>
+<!--=====================================================================-->
+	<layers>
+		<layer name="earth" depth="0">
+			<!-- sera implemente plus tard -->
+			<!-- <units max="255" share="air"/> --> 
+			<!-- <buildings max="255" share="air"/> -->
+		</layer>
+		<layer name="air" depth="1">
+			<!-- <units max="10" shared="earth"/> -->
+		</layer>
+	</layers>
+<!-- certains compteurs peuvent mettre fin au jeu (time up, no more food, etc) -->
+
+	<meters>
+		<meter name="wood" rr="0" is="" sr="" sx=""/>
+		<meter name="food" rr="0" is="" sr="" sx=""/>
+		<meter name="stone" rr="0" is="" sr="" sx=""/>
+		<meter name="iron" rr="0" is="" sr="" sx=""/>
+		<meter type="global" name="time" rr="10" is="" sr="" sx=""/>
+	</meters>
+<!--=========================================================================-->
+	<game>
+		<prices value="1"/> <!-- facteur multiplicateur des prix -->
+		<max_players value="12"/>
+		<speed value="10"/>
+	</game>
+<!--=========================================================================-->
+	<network>
+		<timeout value="10"/>
+	</network>
+<!--=========================================================================-->
+<!--=========INDEXAGE DE CE QUI VA SUIVRE====================================-->
+	<index type="land" name="grass"/>
+	<index type="land" name="rain"/>
+	<index type="entity" name="zogserge"/>
+	<..>
+<!--=========================================================================-->
+<!--=========INSTANTANEES=====================================================-->
+	<instant name="storm" damage="30" splash="10" speed="50"
+	time="100" sprite="storm.spk" taunts="storm.tpk"/>
+	<instant name="rocket" damage="30" splash="10" speed="50"
+	time="0" sprite="rocket.spk"/>
+<!--=========================================================================-->
+	<!-- si les caracteristiques suivantes different pour chaque plan, -->
+	<!-- elle seront placés dans les champs des plans associés -->
+	<entity name="zogserge" sprite="zogserve.spk" max="50" units="1"> <!-- ceci est un exemple d'entitee -->
+		<types> <!-- sprite au repos == max de cette unite en meme temps == combien d'units il prend -->
+			<type name="infantry"/> <!-- value={infantry,mitraill,allied} -->
+		</types>
+		<transportable>	<!-- sera implemente plus tard -->
+			<spaces value="un nombre"/> <!-- combien de places il prend-->
+			<time_to_enter value="un nombre"/> <!-- temps pris pour "embarquer" -->
+			<time_to_deploy value="un nombre"/> <!-- temps pris pour "debarquer" -->
+		</transportable> <!-- sera implemente plus tard -->
+		<transport> <!-- sera implemente plus tard -->
+			<time_to_enter value="un nombre"/> <!-- temps pris pour "embarquer" -->
+			<time_to_deploy value="un nombre"/> <!-- temps pris pour "debarquer" -->
+			<spaces value="un nombre"/> <!-- nombre de places disponibles -->
+		</transport> <!-- sera implemente plus tard -->
+		<visibility warfog="1"/> <!-- si on vois l'entitee derriere le brouillard de guerre gris -->
+		<layers>
+			<layer name="air"/>
+			<layer name="earth"/>
+		</layers>
+		<costs> <!-- ressources consomees (on decremente les compteurs correspondants) -->
+			<cost type="global" name="food" value="400"/> 
+			<cost type="global" name="wood" value="300"/>
+			<!-- certaines races pourront consommer un ou plusieurs -->
+			<!-- "pilote(s)" par unitee construite par exemple -->
+		</costs>
+		<meters>
+			<meter name="life" value="99" kv="0"/>
+			<meter name="mana" value="50" rr="100" is="1"/>
+			<meter name="stamina" value="1" rr="80" is="2"/>
+			<meter name="motivation" value="5" max="10" min="0" kv="0"/>
+			<meter name="perso_wood" value="0" max="10"/>
+			<!-- dans le cas d'un eclair: -->
+			<!--	<meter name="timetolive" value="0" rr="10" is="1" kv="5"> -->
+		</meters>
+
+		<armors>
+			<armor name="skin"/>
+		</armors>
+		<weapons>
+			<weapon name="hand"/>
+			<weapon name="machinegun"/>
+		</weapons>
+		<actions>
+			<move speed="42"/>
+			<live>
+				<!-- list d'actions a faire a sa naissance -->
+			</live>
+			<died>
+				<!-- list d'actions a faire a sa mort -->
+			</died>
+			<attack sprite="peon_attack.spk" taunt="..">
+				<entity type="wood" speed="20">
+					<costs>
+						<cost name="perso_wood" value="-1"/>
+						<!-- 			        ^ -->
+						<!--   donc il incremente 1 	| -->
+					</costs>
+				</entity>
+				<entity type="infantery" speed="1" damage="3"/>
+				<entity type="wood" speed="20">
+					<costs>
+						<cost name="perso_wood" value="-1"/>
+					</costs>
+				</entity>
+				<entity type="food" speed="25" damage="1">
+					<costs>
+						<cost name="perso_food" value="-1"/>
+					</costs>
+				</entity>
+				<entity type="stone" speed="5" damage="1">
+					<costs>
+						<cost name="perso_stone" value="-1"/>
+					</costs>
+				</entity>
+				<entity type="building" speed="20" damage="-10">
+					<costs>
+						<cost type="global" name="wood" value="3"/>
+						<cost type="global" name="stone" value="3"/>
+					</costs>
+				</entity>
+			</attack>
+			<create sprite="..">
+				<entity name="peon" time_to_make="10">	<!-- les capacitees de cette entitee .. -->
+					<prequesite>
+						<entity name="townhall"/>
+						<entity name="farm" value="3"/>
+					</prequesite>
+					<costs>
+						<!-- ressources additionnées a celles du batiment -->
+						<cost name="food" value="50" prealeave_time="0"/> <!-- 0- >1 -->
+						<cost name="wood" value="10"/>			<!-- 0 tout de suite, 1 a la fin-->
+					</costs>
+				</entity>
+			</create>
+			<defend/>
+			<guard/>
+			<follow/>
+			<repear/>
+			<patrol/>
+			<cloackable/>
+			<change_layers>
+				<layers name="air" time_to_change="1" transform_unit="airman"> <!-- lentity actuelle se transforme en newentity -->
+					<!-- <costs.../> -->
+				</layers>
+				<layers name="earth"/>  <!-- l'entitee airman aura un newentity="footman" , sera implemente plus tard-->
+			</change_layers>
+			<can_capture/>	<!-- /les capacitees de cette entitee -->
+		</actions>
+		<auras>		<!-- sera implemente plus tard -->
+			<!-- <aura..> -->
+		</auras>
+	</entity>
+<!--=========================================================================-->
+<!--================== TYPE DESCRIPTION =====================================-->
+<!-- dans un premier temps, le minimum de gestion sur les types d'entitee sera gerer -->
+	<type name="infantery">
+		<speed>
+			<surface>
+				<factor name="moutains" value="0.5"/>
+			</surface>
+			<meter>
+				<factor name="life" value="($life_max / $life)"/>
+				<!--     qu'on implementera       ^     -->
+				<!--         plus tard            |     -->
+			</meter>
+			<layer>
+				<factor layers="sous-sol" value="0.8"/>
+			</layer>
+			<time>
+				<!-- jour/nuit, .... -->
+			</time>
+		</speed>
+		<armor>
+			<!-- pareil attack, defense, ... -->
+			<!-- flying, siege, ... -->
+		</armor>
+	</type>
+<!--=========================================================================-->
+<!--================= DESCRIPTION D'ARMES ===================================-->
+
+	<weapons>
+		<weapon name="rocketlauncher" damage="150" rof="20"
+			range="3" projectile="rocket">
+			<types> <!-- types contre lequels l'arme peut attaquer -->
+				<type name="infantery"/>
+				<type name="global"/>
+				<type name="air"/>
+				<type name="sol"/>
+				<type name="percant"/>
+				<type name="peons"/>
+			</types>
+			<shooting_while_moving value="ok"/> <!-- sera implementer plus tard -->
+		</weapon>
+	</weapons>
+<!--=========================================================================-->
+<!--================= DESCRIPTION D'ARMURES ===================================-->
+	<armors>
+		<armor name="skin" value="10">
+			<types> <!-- types contre lequels l'armure peut defendre -->
+				<type name="sword" value="0.5"/>
+				<type name="pick" value="1.0"/>
+			</types>
+		</armor>
+		<armor name="plate" value="15">
+			<types>
+				<type name="sword" value="1.0"/>
+				<type name="pick" value="2.0"/>
+			</types>
+		</armor>
+	</armors>
+<!--=====================================================================-->
+</root>

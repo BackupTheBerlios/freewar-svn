@@ -1,0 +1,10 @@
+les moteurs parleront de cette maniere:
+
+Le moteur client informera son champ de vision au moteur serveur,
+celui-ci en informera les unites/entitees qu'il est capable de voir
+(son id, sa position, sa direction).
+Le moteur client se chargera d'afficher a l'ecran la map (qu'il aura
+prealablement charge'e) et par dessus les informations du moteur-serveur.
+
+Si un element de la map a ete modifie' sur son champ de vision, le serveur
+en informera le client (une seule fois).
