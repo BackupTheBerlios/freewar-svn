@@ -45,13 +45,13 @@ int	demo(t_display *win)
 		  (win->res_h - win->img->h) / 2, 60))
     {
       puts("erreur lors du lancement du logo\n");
-      return(1);
+      return (1);
     }
   win->text = load_string("A First Chaos ...", FONT, 42);
   if (!win->text)
     {
       fprintf(fd_log, "Error loading font..\n");
-      exit(1);
+      return (1);
     }
   win->dest.x = (win->res_w - win->text->w) / 2;
   win->dest.y = (win->res_h - win->text->h) / 2 + logo_h + 42;

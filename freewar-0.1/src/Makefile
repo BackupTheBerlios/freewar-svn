@@ -28,7 +28,7 @@ PATHFINDING=	pf_init_open.cpp pf_init_values.cpp calc_case.cpp\
 MENU	=	parse_menu.cpp get_headers.cpp\
 		get_menu_entry0.cpp get_menu_entry1.cpp\
 		uid_play.cpp uid_preplay.cpp uid_general.cpp\
-		demo.cpp run_menu.cpp uid_server.cpp\
+		run_menu.cpp uid_server.cpp\
 		aff.cpp aff_func.cpp aff_string.cpp\
 		inputbox.cpp msgbox.cpp
 
@@ -38,7 +38,7 @@ GRAPHICS=	event.cpp xstd.cpp load_img.cpp get_events.cpp\
 		create_sprite.cpp create_gfx_entity.cpp\
 		edit_entity_on_surface.cpp update_surf.cpp\
 		aff_screen.cpp update_anim.cpp edit_arena.cpp\
-		gfx_debug.cpp
+		gfx_debug.cpp demo.cpp
 
 NET_ENGINE=	old.cpp init_msg.cpp init_connection.cpp init_client.cpp\
 		check_select.cpp check_sockets.cpp close_connection.cpp\
