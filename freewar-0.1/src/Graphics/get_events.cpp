@@ -27,6 +27,8 @@
 
 #include "freewar.h"
 
+//tmp
+int		manage_console(t_engine *e);
   // pecho les events
 int		get_events(t_engine *e)
 {
@@ -46,9 +48,11 @@ int		get_events(t_engine *e)
       free_engine(e);
       return (1);
     }
+  // Pour tester la console:
+  e->console = true;
   // envoyer au jeu les events
   if (e->console == true)
-    {}
+    manage_console(e);
   else
     {
       // avec le systeme pourri:

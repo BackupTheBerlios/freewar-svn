@@ -36,7 +36,6 @@ int		get_launch_params()
 int	get_and_aff(){return(0);}
 int	get_and_play_sound(){return(0);}
 
-int	manage_entities(){return(0);}
 int	manage_player(){return(0);}
 int	play_sound(){return(0);}
 

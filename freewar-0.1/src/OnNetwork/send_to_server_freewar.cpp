@@ -44,7 +44,9 @@ int		send_to_all_fw(t_engine *e, short tag,
   int		i;
   int		player;
   
-  for (i = 0; i < e->nb_players; i++)
+  // TODO: chaipo tro
+  // for (i = 0; i < e->nb_players; i++)
+  for (i = 1; i < e->nb_players; i++)
     {
       player = e->assos_clients[i];
       if (player >= 1)

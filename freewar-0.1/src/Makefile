@@ -10,7 +10,7 @@
 
 VPATH	=	Network:std:load:Graphics:Pathfinding:../lib/sdlgfx/\
 		:Actions:Entities:Graphics/Menu:ActionsBind:Engine\
-		:OnNetwork:OnGraphics:Sound
+		:OnNetwork:OnGraphics:Sound:Graphics/Console
 
 SDL_GFX	=	SDL_gfxPrimitives.cpp
 
@@ -42,6 +42,8 @@ GRAPHICS=	event.cpp xstd.cpp load_img.cpp get_events.cpp\
 		edit_entity_on_surface.cpp update_surf.cpp\
 		aff_screen.cpp update_anim.cpp edit_arena.cpp\
 		gfx_debug.cpp demo.cpp
+
+CONSOLE=	manage_console.cpp
 
 NET_ENGINE=	old.cpp init_msg.cpp init_connection.cpp init_client.cpp\
 		check_select.cpp check_sockets.cpp close_connection.cpp\
@@ -93,7 +95,8 @@ SRC	=	freewar.cpp a_faire.cpp get_cfg.cpp\
 		init_players_for_game.cpp timer.cpp\
 		$(GRAPHICS) $(MENU) $(DB) $(ENTITY) $(NETWORK)\
 		$(NET_ENGINE) $(REQUEST) $(SDL_GFX) $(ACTION)\
-		$(CLIENT) $(ACTIONSBIND) $(ENGINE) $(STD) $(SOUND)
+		$(CLIENT) $(ACTIONSBIND) $(ENGINE) $(STD) $(SOUND)\
+		$(CONSOLE)
 
 OBJ	=	$(SRC:.cpp=.o)
 
