@@ -15,7 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Freewar; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #include "freewar.h"
+
 int		wait_all_player_is_ready(t_engine *e);
 int		engine_server(t_engine *e, t_cfg *cfg,
 			      t_game_param *game_param)
@@ -31,28 +33,27 @@ int		engine_server(t_engine *e, t_cfg *cfg,
   reset_timer(e);
   while (69)
     {
-      if (check_select(100))
+      // TODO: modifier la lib network pour ajouter des handlers de fct.
+      // Ca aura pour but d'integrer l'execution de manage_requests dans
+      // check_select.. (optimisation)
+      if (cnt && check_select(100))
 	{
+	  // une boucle pour gerer toutes les requettes de tous les players
+	  // et d'y repondre. (yaura un max qd meme)
 	  manage_requests(e);
-      /*
-	une boucle pour gerer toutes les requettes de tous les players
-	et d'y repondre. (yaura un max qd meme)
-      */
 	}
-      /*
-	- gestion des entitees, boucle qui 
-	va faire toutes les actions necessaires ..
-	mouvements, attaques, construction etc ..
-      */
+      // si un player n'a plu d'entitees en vie .. il meur X)
       manage_player();
-      /*
-	si un player n'a plu d'entitees en vie .. il meur X)
-      */
 #ifdef GRAPHICS_TIME
       Uint32 ticks=SDL_GetTicks();
 #endif
       if (timer_wait(e))
 	{
+	  /*
+	    - gestion des entitees, boucle qui 
+	    va faire toutes les actions necessaires ..
+	    mouvements, attaques, construction etc ..
+	  */
 	  manage_entities(e, game_param);
 	  if (get_events(e))
 	    return (1);
@@ -72,7 +73,7 @@ int		engine_server(t_engine *e, t_cfg *cfg,
 	  */
 	  reset_timer(e);
     	}
-      // synchro players(); apriori, non necessaire
+      // synchro_players(); apriori, non necessaire
     }  
   return (0);
 }

@@ -105,8 +105,8 @@ char		*fw_inputbox(char *title, char *msg, char *def_val)
   char	*str;
 
   str = xstrdup(def_val);
-  x = ((gfx->win->res_w - MB_WIDTH) / 2);
-  y = ((gfx->win->res_h - MB_HEIGHT) / 2);
+  x = ((gfx->win->sdlMainScreen->w - MB_WIDTH) / 2);
+  y = ((gfx->win->sdlMainScreen->h - MB_HEIGHT) / 2);
   gfx->win->text = load_string(title, FONT, 13);
   gfx->win->dest.w = MB_WIDTH + 2;
   gfx->win->dest.h = MB_HEIGHT + 2;

@@ -253,3 +253,14 @@ char	*add_to_data(size_t len, char *data, size_t plus, char *add)
   memcpy(data + len, add, plus);
   return (data);
 }
+
+bool		exist_file(char *file)
+{
+  FILE		*fd;
+
+  fd = fopen(file, "r");
+  if (!fd)
+    return (false);
+  fclose(fd);
+  return (true);
+}

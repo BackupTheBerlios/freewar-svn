@@ -38,7 +38,7 @@ Uint32	GetColor(t_display *win, char *color)
     return(SDL_MapRGB(win->sdlMainScreen->format,255,0,0));
   else if (!strcmp("CC0000", color))
     return(SDL_MapRGB(win->sdlMainScreen->format,208,0,0));
-	return (0);
+  return (0);
 }
 
 int		draw_button(t_display *win, t_menu_entry *menu)
@@ -50,11 +50,11 @@ int		draw_button(t_display *win, t_menu_entry *menu)
   if(win->img == NULL)
     return(1);
   //SDL_SetColorKey(win->img, SDL_SRCCOLORKEY,0);
-  if (info->y > win->res_h - win->img->h)
-    info->y = win->res_h - win->img->h;
+  if (info->y > win->sdlMainScreen->h - win->img->h)
+    info->y = win->sdlMainScreen->h - win->img->h;
   win->dest.y = info->y;
-  if (info->x > win->res_w - win->img->w)
-    info->x =  win->res_w - win->img->w;
+  if (info->x > win->sdlMainScreen->w - win->img->w)
+    info->x =  win->sdlMainScreen->w - win->img->w;
   win->dest.x = info->x;
   aff_surf(win->img, 255);
   win->text = load_string(info->value, FONT, info->text_size);

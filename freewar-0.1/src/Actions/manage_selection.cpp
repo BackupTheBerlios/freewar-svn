@@ -28,9 +28,9 @@ int				init_selection(t_engine *e)
 		      //gfx->spk[gfx->entity[e->select_gfx[s]].id_sprite].w = gfx->spk[e->select_img].sprite->w;
 		      //gfx->spk[gfx->entity[e->select_gfx[s]].id_sprite].h = gfx->spk[e->select_img].sprite->h;
 
-  e->select_img = create_sprite("select.png");
-  e->select_img_neutral = create_sprite("select_neutral.png");
-  e->select_img_ennemy = create_sprite("select_ennemy.png");
+  e->select_img = create_sprite("img/select.png");
+  e->select_img_neutral = create_sprite("img/select_neutral.png");
+  e->select_img_ennemy = create_sprite("img/select_ennemy.png");
   for (i = 0; i < FW_MAX_SELECT; i++)
     {
       e->select[i] = (t_entity**)xmalloc(sizeof(t_entity**) * e->nb_players);

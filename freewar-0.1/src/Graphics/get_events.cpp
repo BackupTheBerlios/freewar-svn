@@ -27,39 +27,35 @@
 
 #include "freewar.h"
 
-
+  // pecho les events
 int		get_events(t_engine *e)
 {
-  // pecho les events
-  if (e->g.event_ok)
+  // TODO: ne PLUS passer par une structure a nous d'event, 
+  // mais utiliser directement celle de la SDL (ou une interface qui
+  // se sert directement).
+  if (event(e->events, e->other_events))
+    return (1);
+  if (e->other_events->quit)
     {
-      if (event(e->events, e->other_events))
-	return (1);
-      if (e->other_events->quit)
-	{
-	  fprintf(fd_log, "EXIT\n");
-	  if (!(cnt->clients[e->assos_clients[0]].sock))
-	    fprintf(fd_log, "ouai, bah c'est con, ta pas de clients !\n");
-	  else
-	    stock_msg(&cnt->clients[e->assos_clients[0]], TAG_EXIT, 0, NULL);
-	  // fermer toutes les connections 
-	  close_connection();
-	  free_engine(e);
-	  return (1);
-	}
-      // envoyer au jeu les events
-      if (e->console == true)
-	{}
-      else if (!(cnt->clients[e->assos_clients[0]].sock))
-	fprintf(fd_log, "ouai, bah c'est con, ta pas de clients !\n");
-      else
-	{
-		// avec le systeme pourri:
-//	  stock_msg(&cnt->clients[e->assos_clients[0]], TAG_EVENTS, sizeof(*(e->events)), e->events);
-//	  e->g.event_ok = 0;
-		// maintenant:
-		manage_events(e);
-	}
+      // TODO: Ne pas quitter directement dans cette fonction
+
+      fprintf(fd_log, "EXIT\n");
+      // TODO: en informer les autres joueurs:
+      // stock_msg(&cnt->clients[e->assos_clients[0]], TAG_EXIT, 0, NULL);
+      close_connection();      // fermer toutes les connections 
+      free_engine(e);
+      return (1);
+    }
+  // envoyer au jeu les events
+  if (e->console == true)
+    {}
+  else
+    {
+      // avec le systeme pourri:
+      //	  stock_msg(&cnt->clients[e->assos_clients[0]], TAG_EVENTS, sizeof(*(e->events)), e->events);
+      //	  e->g.event_ok = 0;
+      // maintenant:
+      manage_events(e);
     }
   return (0);
 }

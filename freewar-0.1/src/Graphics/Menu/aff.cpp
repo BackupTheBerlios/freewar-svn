@@ -139,8 +139,8 @@ int		launch_logo(t_display *win, int x, int y, int speed)
   if(win->img == NULL)
     return(1);
   SDL_SetColorKey(win->img, SDL_SRCCOLORKEY,0);
-  //win->sdlSrcSprite.w = win->res_w;
-  //win->sdlSrcSprite.h = win->res_h;
+  //win->sdlSrcSprite.w = win->sdlMainScreen->w;
+  //win->sdlSrcSprite.h = win->sdlMainScreen->h;
   //win->sdlSrcSprite.y = 0;
   //win->sdlSrcSprite.x = 0;
   win->possprite.x = x;
@@ -249,7 +249,7 @@ void		*launch_menu(t_display *win, t_menu_entry *menu)
     }
   if (win->img = IMG_Load("AFirstChaos/img/menu/freewar_logo.png"))
     {
-      win->dest.x = (win->res_w - win->img->w) / 2;
+      win->dest.x = (win->sdlMainScreen->w - win->img->w) / 2;
       win->dest.y = 4;
       aff_surf(win->img, 255);
       SDL_FreeSurface(win->img);

@@ -83,14 +83,20 @@ SDL_Surface	*load_string(char *str, char *font, int size)
 {
   SDL_Color color;
   SDL_Surface *text;
-  
+
   color.r=255;
   color.g=255;
   color.b=255;
+  // SDL_TTF is SHIT, it MUST be preceded with this function:
+  if (!exist_file(font))
+    {
+      fprintf(fd_log, "Font inexistant %s\n", font);
+      return (0);
+    }
   gfx->win->font = TTF_OpenFont(font, size);
   if (!gfx->win->font)
   {
-    fprintf(fd_log, "pb de font");
+    fprintf(fd_log, "pb de font %s", TTF_GetError());
 	return (0);
   }
   if (!str || !str[0])

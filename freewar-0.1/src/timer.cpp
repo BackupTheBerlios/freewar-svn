@@ -31,21 +31,21 @@
 
 int			timer_count(char *s, bool start)
 {
-	static	Uint32	time = 0;
+  static	Uint32	time = 0;
 
-	if (!s)
-	 return (1);
-	if (start == true)
-	{
-		fprintf(fd_log, "TIMER: %s start\n", s);
-		time = SDL_GetTicks();
-	}
-	else
-	{
-		fprintf(fd_log, "TIMER: %s step ---> %d miliseconds\n",
-			s, SDL_GetTicks() - time);
-	}
-	return (0);
+  if (!s)
+    return (1);
+  if (start == true)
+    {
+      fprintf(fd_log, "TIMER: %s start\n", s);
+      time = SDL_GetTicks();
+    }
+  else
+    {
+      fprintf(fd_log, "TIMER: %s step ---> %d miliseconds\n",
+	      s, SDL_GetTicks() - time);
+    }
+  return (0);
 }
 int			reset_timer(t_engine *e)
 {
