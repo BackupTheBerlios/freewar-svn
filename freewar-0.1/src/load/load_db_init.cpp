@@ -30,11 +30,12 @@
  /* dsl si c'est porc :( */
 /* je deporqueriserai plus tar :) */
 
-#include <iostream>
+#include <string>
 
 int		load_db_init(t_db_info *db_info, t_cfg *cfg)
 {
-  TiXmlDocument doc(cfg->GamePath << cfg->Game);
+  std::string	gamepath(std::string(cfg->GamePath) + std::string(cfg->Game));
+  TiXmlDocument doc(gamepath.c_str());
   const char	*buf;
   int		int_buf;
   int		i;
@@ -44,7 +45,7 @@ int		load_db_init(t_db_info *db_info, t_cfg *cfg)
     {
       char	*err = "Failed to load game database file: ";
       strcpy(err_msg, err);
-      strcat(err_msg, cfg->GamePath << cfg->Game);
+      strcat(err_msg, gamepath.c_str());
       //send_error_trap(err_msg, 1);
       return (put_error(err_msg));
     }
