@@ -58,7 +58,7 @@ int		init_global_game(t_engine *e, t_game_param *gp,
   if (load_db_data(e, gp, cfg))
     return (1);
   tmp_init(e, cfg, &e->g);// TODO: une horreur a changer
-  init_players_for_game(e, type);// TODO: a adapter
+//   init_players_for_game(e, type);// TODO: a adapter
   // charge la map
   if (load_map_data(e, gp->id_map))
     return (put_error("Load map failed"));

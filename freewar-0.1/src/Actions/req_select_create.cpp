@@ -48,7 +48,7 @@ int		req_select_create_units(t_engine *e, t_trame *trame, int src)
     }
   else
     req.id_action = create_action(e, e->select[0][src], base, game.nb_units);
-  stock_msg(&(cnt->clients[e->assos_clients[src]]), TAG_SELECT_MOVE_REPLY, sizeof(req), &req);
+  stock_msg(e->players[src].client, TAG_SELECT_MOVE_REPLY, sizeof(req), &req);
   return (0);
 }
 
@@ -74,6 +74,6 @@ int		req_select_create_building(t_engine *e, t_trame *trame, int src)
    }
  else
    req.id_action = create_action(e, e->select[0][src], base, &game.pos);
- stock_msg(&(cnt->clients[e->assos_clients[src]]), TAG_SELECT_MOVE_REPLY, sizeof(req), &req);
+ stock_msg(e->players[src].client, TAG_SELECT_MOVE_REPLY, sizeof(req), &req);
  return (0);
 }

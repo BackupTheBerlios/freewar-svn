@@ -42,19 +42,10 @@ int		send_to_all_fw(t_engine *e, short tag,
 			       unsigned int len, void *msg)
 {
   int		i;
-  int		player;
-  
-  // TODO: chaipo tro
-  // for (i = 0; i < e->nb_players; i++)
-  for (i = 1; i < e->nb_players; i++)
-    {
-      player = e->assos_clients[i];
-      if (player >= 1)
-	{
-	  printf("HUUUUUUUUUUUUUUUUUUUUU\n");fflush(stdout);
-	  stock_msg(&(cnt->clients[player]), tag, len, msg);
-	}
-    }
+
+  for (i = 0; i < e->nb_players; i++)
+    if (e->players[i].client)
+      stock_msg(e->players[i].client, tag, len, msg);
   return (0);
 }
 

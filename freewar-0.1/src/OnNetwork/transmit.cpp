@@ -27,20 +27,22 @@
 
 #include "freewar.h"
 
+// TODO: mieux penser la transmission
+
 int		transmit_requests()
 {
-  t_trame	req;
+//   t_trame	req;
 
-  recv_trame(&(cnt->clients[0]), &req);
-  stock_msg(&cnt->clients[0], req.tag, req.len, req.msg);
+//   recv_trame(&(cnt->clients[0]), &req);
+//   stock_msg(&cnt->clients[0], req.tag, req.len, req.msg);
   return (0);
 }
 
 int		transmit_response()
 {
-  t_trame	req;
+//   t_trame	req;
 
-  recv_trame(&cnt->clients[1], &req);
-  stock_msg(&cnt->clients[0], req.tag, req.len, req.msg);
+//   recv_trame(&cnt->clients[1], &req);
+//   stock_msg(&cnt->clients[0], req.tag, req.len, req.msg);
   return (0);
 }

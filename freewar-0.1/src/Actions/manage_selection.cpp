@@ -79,8 +79,8 @@ int				manage_selection(t_engine *e, t_trame *t,
   int				id_trame;
 
   nb_select = (t->len - sizeof (int)) / sizeof(unsigned long);
-  if (!player && !e->server)
-    stock_msg(&(cnt->clients[1]), t->tag, t->len, t->msg);
+//   if (!player && !e->server)
+//     stock_msg(&(cnt->clients[1]), t->tag, t->len, t->msg);
   if (nb_select > FW_MAX_SELECT)
     nb_select = FW_MAX_SELECT;
   i = 0;
@@ -105,7 +105,7 @@ int				manage_selection(t_engine *e, t_trame *t,
       e->select[i][player] = 0;
       i++;
     }
-  stock_msg(&cnt->clients[e->assos_clients[player]],
-	    TAG_SELECT, sizeof(id_trame), &id_trame);
+//   stock_msg(&cnt->clients[e->assos_clients[player]],
+// 	    TAG_SELECT, sizeof(id_trame), &id_trame);
   return (0);
 }

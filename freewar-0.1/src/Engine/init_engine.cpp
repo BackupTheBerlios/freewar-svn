@@ -27,12 +27,6 @@ int		init_sdl()
       return (0);
     }
   atexit(SDL_Quit);
-  if (SDLNet_Init() == -1)
-    {
-      fprintf(fd_log, "SDLNet_Init: %s\n", SDLNet_GetError());
-      return (1);
-    }
-  atexit(SDLNet_Quit);
   return (0);
 }
 

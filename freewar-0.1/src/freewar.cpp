@@ -50,13 +50,14 @@ int			freewar()
   if (load_db_init(db_info, cfg))
      return (1);
   init_engine(engine);
+  init_net(engine);
   if (open_windows(engine, db_info, cfg))
     return (1);
   if (launch_demo())
     return (1);
   engine->nb_players = 1;
   // attente du menu qui decide du type de partie (avec qui, etc..)
-  if ((ret = before_starting_game(game_param)) != ERROR)
+  if ((ret = before_starting_game(engine, game_param)) != ERROR)
     {
       if (ret == HOME || ret == REMOTE)
 	{
@@ -75,15 +76,17 @@ int			freewar()
 	  if (engine_client(engine, cfg, game_param))
 	    return (1);
 	}
+      else
+	put_error("what else?");
     }
   close_connection();
-  SDLNet_Quit();
+  nettool_quit();
   SDL_Quit();
   close_log();
-  free(engine);
-  free(game_param);
-  free(db_info);
-  free(cfg);
+  xfree(engine);
+  xfree(game_param);
+  xfree(db_info);
+  xfree(cfg);
   return (0);
 }
 

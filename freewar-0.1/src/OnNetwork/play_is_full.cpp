@@ -29,10 +29,11 @@
 
 int		play_is_full()
 {
-  int		i;
+  int		i = 0;
 
-  for (i = 0; cnt->clients[i].sock; i++)
-    ;
+  // TODO: parcourir plutot la liste des players (eu avec le newhandler)
+//   for (i = 0; cnt->clients[i].sock; i++)
+//     ;
   if (i >= FW_MAX_CLIENTS)
     return (1);
   return (0);

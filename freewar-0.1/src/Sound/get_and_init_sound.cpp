@@ -48,24 +48,25 @@ int		get_and_init_sound(t_cfg *cfg)
   return (0);
   lock_cfg = 0;
   open = 0;
-  recv_client_req(&cnt->clients[0], req);
-  while (is_valid_trame(req, TAG_INIT_SOUND_DONE))
-    {
-      if (!lock_cfg && is_valid_trame(req, TAG_INIT_SOUND_NEWS_PARAM))
-	update_sound_param(req, cfg);
-      else if (open == 0 && is_valid_trame(req, TAG_INIT_SOUND_OPEN_DEVICE))
-	{
-	  //open_device();
-	  lock_cfg = 1;
-	  open = 1;
-	}
-      // else if (is_valid_trame(req, TAG_INIT_SOUND_))
-// 	; autres ...
-#ifdef FW_DEBUG
-      else
-	put_error("trame loss from local game in get_and_init_sound");
-#endif
-      recv_client_req(&cnt->clients[0], req);
-    }
+  // TODO: a mettre dans handlers (et appeler check_select)
+//   recv_client_req(&cnt->clients[0], req);
+//   while (is_valid_trame(req, TAG_INIT_SOUND_DONE))
+//     {
+//       if (!lock_cfg && is_valid_trame(req, TAG_INIT_SOUND_NEWS_PARAM))
+// 	update_sound_param(req, cfg);
+//       else if (open == 0 && is_valid_trame(req, TAG_INIT_SOUND_OPEN_DEVICE))
+// 	{
+// 	  //open_device();
+// 	  lock_cfg = 1;
+// 	  open = 1;
+// 	}
+//       // else if (is_valid_trame(req, TAG_INIT_SOUND_))
+// // 	; autres ...
+// #ifdef FW_DEBUG
+//       else
+// 	put_error("trame loss from local game in get_and_init_sound");
+// #endif
+//       recv_client_req(&cnt->clients[0], req);
+//     }
 	return (0);
 }

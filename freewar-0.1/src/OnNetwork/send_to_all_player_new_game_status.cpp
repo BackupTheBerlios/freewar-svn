@@ -31,7 +31,8 @@ int		send_to_all_player_new_game_status(t_game_param *gp)
 {
   int		i;
 
-  for (i = 0; cnt->clients[i].sock; i++)
-    stock_msg(&cnt->clients[i], TAG_GAME_STATUS, sizeof(*gp), (void*)gp);
+  // TODO: parcourir les players..
+//   for (i = 0; cnt->clients[i].sock; i++)
+//     stock_msg(&cnt->clients[i], TAG_GAME_STATUS, sizeof(*gp), (void*)gp);
   return (0);
 }

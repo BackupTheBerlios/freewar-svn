@@ -9,7 +9,7 @@
 ##
 
 VPATH	=	Network:std:load:Graphics:Pathfinding:../lib/sdlgfx/\
-		:Actions:Entities:Graphics/Menu:ActionsBind:Engine\
+		:Actions:Entities:ActionsBind:Engine\
 		:OnNetwork:OnGraphics:Sound:Graphics/Console
 
 SDL_GFX	=	SDL_gfxPrimitives.cpp
@@ -28,12 +28,12 @@ PATHFINDING=	pf_init_open.cpp pf_init_values.cpp calc_case.cpp\
 		searchsmall.cpp pathfinding.cpp my_pathlist.cpp\
 		get_best_type.cpp
 
-MENU	=	parse_menu.cpp get_headers.cpp\
-		get_menu_entry0.cpp get_menu_entry1.cpp\
-		uid_play.cpp uid_preplay.cpp uid_general.cpp\
-		run_menu.cpp uid_server.cpp\
-		aff.cpp aff_func.cpp aff_string.cpp\
-		inputbox.cpp msgbox.cpp
+#MENU	=	parse_menu.cpp get_headers.cpp\
+#		get_menu_entry0.cpp get_menu_entry1.cpp\
+#		uid_play.cpp uid_preplay.cpp uid_general.cpp\
+#		run_menu.cpp uid_server.cpp\
+#		aff.cpp aff_func.cpp aff_string.cpp\
+#		inputbox.cpp msgbox.cpp
 
 GRAPHICS=	event.cpp xstd.cpp load_img.cpp get_events.cpp\
 		create_and_open_screen.cpp destroy.cpp\
@@ -45,15 +45,10 @@ GRAPHICS=	event.cpp xstd.cpp load_img.cpp get_events.cpp\
 
 CONSOLE=	manage_console.cpp
 
-NET_ENGINE=	old.cpp init_msg.cpp init_connection.cpp init_client.cpp\
-		check_select.cpp check_sockets.cpp close_connection.cpp\
-		new_client.cpp recv.cpp send.cpp list.cpp loss_client.cpp\
-		move_last_player.cpp msg_wait.cpp free_net.cpp
-
 NETWORK	=	ping_all_client.cpp wait_all_player_is_ready.cpp\
 		play_is_full.cpp send_to_all_player_new_game_status.cpp\
 		transmit.cpp send_to_server_freewar.cpp\
-		recv_from_server_freewar.cpp
+		recv_from_server_freewar.cpp init_net.cpp
 
 ACTION	=	del_action.cpp del_next_actions.cpp\
 		pop_action.cpp put_next_action.cpp\
@@ -90,7 +85,7 @@ SRC	=	freewar.cpp a_faire.cpp get_cfg.cpp\
 		init_globals.cpp get_direction.cpp\
 		$(PATHFINDING) move_clients_to_players.cpp\
 		init_engine.cpp aff_game.cpp init_global_game.cpp\
-		get_path.cpp manage_requests.cpp\
+		get_path.cpp process.cpp\
 		manage_selection.cpp join_game.cpp init_minimap.cpp\
 		init_players_for_game.cpp timer.cpp\
 		$(GRAPHICS) $(MENU) $(DB) $(ENTITY) $(NETWORK)\
@@ -104,18 +99,18 @@ NAME	=	freewar_`uname -s`
 
 EXECUTABLE =	freewar
 
-CXX	=	g++
+CC	=	g++
 
 CXXFLAGS=	-I../include/ -I../include/sdl/ `sdl-config --cflags` -g3\
-		-I../lib/sdlgfx/ -I ../lib/sdlGL/
+		-I../lib/sdlgfx/ -I../lib/sdlGL/ -I../lib/xtools\
 
-LIBPATH =	-L../lib/ -L/usr/lib/ -L/usr/loca/lib/
+LIBPATH =	-L../lib/ -L/usr/lib/ -L/usr/local/lib/
+
 LIBSDL	=	`sdl-config --libs` -lSDL -lSDL_net -lSDL_image\
 		-lSDL_ttf
 LIB	= 	$(LIBPATH) $(LIBSDL)\
 		-ltinyxml_`uname -s`\
-		-lstdtool -lxmltool
-#		 -lefence
+		-lstdtool -lxmltool -lnettool
 
 CP	=	/bin/cp -f
 RM	=	/bin/rm -f

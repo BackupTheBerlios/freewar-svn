@@ -40,24 +40,26 @@ int		wait_all_player_is_ready(t_engine *e)
     {
       if (check_select(1000))
 	{
-	  for (i = 0; cnt->clients[i].sock; i++)
-	    {
-	      while (exec_msg(&(cnt->clients[i]), &recv))
-		{
-		  if (is_valid_trame(&recv, TAG_PLAYERS_READY))
-		    {
-		      if (++nb >= max)
-			return (0);
-		    }
-		  else
-		    fprintf(fd_log, "recu %d from %d player\n", recv.tag, i);
-		}
-	    }
-	  max = i;
+	  // TODO: mettre ac handlers
+// 	  for (i = 0; cnt->clients[i].sock; i++)
+// 	    {
+// 	      while (exec_msg(&(cnt->clients[i]), &recv))
+// 		{
+// 		  if (is_valid_trame(&recv, TAG_PLAYERS_READY))
+// 		    {
+// 		      if (++nb >= max)
+// 			return (0);
+// 		    }
+// 		  else
+// 		    fprintf(fd_log, "recu %d from %d player\n", recv.tag, i);
+// 		}
+// 	    }
+// 	  max = i;
 	}
     }
-  if (cnt)
-    for (i = 0; cnt->clients[i].sock; i++)
-      stock_msg(&(cnt->clients[i]), TAG_PLAYERS_READY, 0, NULL);
+  // TODO: ca aussi
+//   if (cnt)
+//     for (i = 0; cnt->clients[i].sock; i++)
+//       stock_msg(&(cnt->clients[i]), TAG_PLAYERS_READY, 0, NULL);
   return (0);
 }

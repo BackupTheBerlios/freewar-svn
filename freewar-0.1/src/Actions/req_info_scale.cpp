@@ -101,7 +101,7 @@ int			req_info_scale(t_engine *e, t_trame *trame, int src)
     {
       fprintf(stderr, "ERROR: req_info_scale: failed\n");
       req.nb_ent = -1;
-      stock_msg(&(cnt->clients[e->assos_clients[src]]),
+      stock_msg(e->players[src].client,
 		TAG_INFO_SCALE_REPLY, sizeof(int) + sizeof(char), &req);
       return (1);
     }
@@ -135,7 +135,7 @@ int			req_info_scale(t_engine *e, t_trame *trame, int src)
     memcpy(&(req.ent), data, len);
   req.nb_ent = t;
   fprintf(stderr, "nombre d'entitees retournees:\t\t[%d]\n", t);fflush(stderr);
-  stock_msg(&(cnt->clients[e->assos_clients[src]]), TAG_INFO_SCALE_REPLY,
+  stock_msg(e->players[src].client, TAG_INFO_SCALE_REPLY,
 	    sizeof(int) + sizeof(char) + len, &req);
  
   // printf("len [%d] t[%d] t*sizeof(t_info_scale) [%d]\n", len, t, sizeof(t_info_scale) * t);

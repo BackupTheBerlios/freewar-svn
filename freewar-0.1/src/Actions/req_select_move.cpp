@@ -48,6 +48,6 @@ int			req_select_move(t_engine *e, t_trame *trame, int src)
   for (i = 0; i < FW_MAX_SELECT && e->select[i][src]; i++)
     if (src == e->select[i][src]->app)
       req.id_action = create_action(e, e->select[i][src], game.pos);
-  stock_msg(&(cnt->clients[e->assos_clients[src]]), TAG_SELECT_MOVE_REPLY, sizeof(req), &req);
+  stock_msg(e->players[src].client, TAG_SELECT_MOVE_REPLY, sizeof(req), &req);
   return (0);
 }

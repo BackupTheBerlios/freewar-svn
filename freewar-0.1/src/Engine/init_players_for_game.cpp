@@ -25,6 +25,7 @@ int		init_player(t_player *player)
   player->color = 0xFFFF00FF;
   player->race = 0;
   player->team = -1;
+  player->client = NULL;
   return (0);
 }
 
@@ -44,24 +45,26 @@ int				init_players_for_game(t_engine *e, int who)
       //while (i < 2)
       //{
       check_select(1000);
-      for (list = cnt->newclient; list; list = next)
-	{
-	  next = list->next;
-	  //if (list->state == STATE_PLAYER)
-	  //{
-	  cnt->clients =
-	    (t_client*)xrealloc(cnt->clients, sizeof(*cnt->clients) * (i + 2));
-	  memcpy(&cnt->clients[i], &list->c, sizeof(list->c));
-	  e->assos_clients[i] = i;
-	  info_player.id_player = i;
-	  stock_msg(&(cnt->clients[i]), TAG_PLAYER_INFO,
-		    sizeof(info_player), &info_player);
-	  fprintf(fd_log, "find one client\n");
-	  cnt->newclient = del_in_list(cnt->newclient, &list->c);
-	  i++;
-	  //}
-	}
-      init_client(&cnt->clients[i]);
+
+      // TODO: mettre dans newhandler..
+//       for (list = cnt->newclient; list; list = next)
+// 	{
+// 	  next = list->next;
+// 	  //if (list->state == STATE_PLAYER)
+// 	  //{
+// 	  cnt->clients =
+// 	    (t_client*)xrealloc(cnt->clients, sizeof(*cnt->clients) * (i + 2));
+// 	  memcpy(&cnt->clients[i], &list->c, sizeof(list->c));
+// 	  e->assos_clients[i] = i;
+// 	  info_player.id_player = i;
+// 	  stock_msg(&(cnt->clients[i]), TAG_PLAYER_INFO,
+// 		    sizeof(info_player), &info_player);
+// 	  fprintf(fd_log, "find one client\n");
+// 	  cnt->newclient = del_in_list(cnt->newclient, &list->c);
+// 	  i++;
+// 	  //}
+// 	}
+//       init_client(&cnt->clients[i]);
       //}
     }
   e->nb_players = i;

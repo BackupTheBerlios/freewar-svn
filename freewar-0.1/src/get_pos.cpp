@@ -27,15 +27,17 @@
 
 #include "freewar.h"
 
-int		get_pos_of_socket(TCPsocket socket)
-{
-  int		i;
+// with newer version of our libnet, its deprecated
 
-  for (i = 0; cnt->clients[i].sock; i++)
-    if (cnt->clients[i].sock == socket)
-      return (i);
-  return (-1);
-}
+// int		get_pos_of_socket(TCPsocket socket)
+// {
+//   int		i;
+
+//   for (i = 0; cnt->clients[i].sock; i++)
+//     if (cnt->clients[i].sock == socket)
+//       return (i);
+//   return (-1);
+// }
 
 //int		get_pos_of_player(t_pos *pos, int client)
 //{

@@ -27,35 +27,35 @@
 
 #include "freewar.h"
 
-int	demo(t_display *win)
-{
-  int	logo_h;
+// int	demo(t_display *win)
+// {
+//   int	logo_h;
 
-  if (!win)
-    return (1);
-  win->alpha = 0;
-  win->delta_alpha = 7;
-  if (!(win->img = IMG_Load("oldafc/menu/freewar_logo.png")))
-    {
-      fprintf(fd_log, "Error loading image demo\n");
-      return (1);
-    }
-  logo_h = win->img->h;
-  if (launch_logo(win, (win->sdlMainScreen->w - win->img->w) / 2,
-		  (win->sdlMainScreen->h - win->img->h) / 2, 60))
-    {
-      puts("erreur lors du lancement du logo\n");
-      return (1);
-    }
-  win->text = load_string("A First Chaos ...", FONT, 42);
-  if (!win->text)
-    {
-      fprintf(fd_log, "Error loading font..\n");
-      return (1);
-    }
-  win->dest.x = (win->sdlMainScreen->w - win->text->w) / 2;
-  win->dest.y = (win->sdlMainScreen->h - win->text->h) / 2 + logo_h + 42;
-  aff_surf(win->text, 255);
-  SDL_FreeSurface(win->text);
-  return(0);
-}
+//   if (!win)
+//     return (1);
+//   win->alpha = 0;
+//   win->delta_alpha = 7;
+//   if (!(win->img = IMG_Load("oldafc/menu/freewar_logo.png")))
+//     {
+//       fprintf(fd_log, "Error loading image demo\n");
+//       return (1);
+//     }
+//   logo_h = win->img->h;
+//   if (launch_logo(win, (win->sdlMainScreen->w - win->img->w) / 2,
+// 		  (win->sdlMainScreen->h - win->img->h) / 2, 60))
+//     {
+//       puts("erreur lors du lancement du logo\n");
+//       return (1);
+//     }
+//   win->text = load_string("A First Chaos ...", FONT, 42);
+//   if (!win->text)
+//     {
+//       fprintf(fd_log, "Error loading font..\n");
+//       return (1);
+//     }
+//   win->dest.x = (win->sdlMainScreen->w - win->text->w) / 2;
+//   win->dest.y = (win->sdlMainScreen->h - win->text->h) / 2 + logo_h + 42;
+//   aff_surf(win->text, 255);
+//   SDL_FreeSurface(win->text);
+//   return(0);
+// }
