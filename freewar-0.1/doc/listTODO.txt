@@ -1,0 +1,8 @@
+./OnGraphics/launch_demo.cpp:  if (demo(gfx->win)) // TODO: doit etre mis plus haut
+./OnGraphics/before_starting_game.cpp:  // TODO: TOUT ca a revoir une fois l'interface du menu defini:
+./Graphics/get_events.cpp:  // TODO: ne PLUS passer par une structure a nous d'event, 
+./Graphics/get_events.cpp:      // TODO: Ne pas quitter directement dans cette fonction
+./Graphics/get_events.cpp:      // TODO: en informer les autres joueurs:
+./Engine/engine_server.cpp:      // TODO: modifier la lib network pour ajouter des handlers de fct.
+./Engine/init_global_game.cpp:  tmp_init(e, cfg, &e->g);// TODO: une horreur a changer
+./Engine/init_global_game.cpp:  init_players_for_game(e, type);// TODO: a adapter
