@@ -9,8 +9,8 @@
 	</races>
 <!--=====================================================================-->
 	<maps>
-		<map name="map_2" max_players="2"/>
-		<map name="map_4" max_players="4"/>
-		<map name="map_8" max_players="8"/>
+		<map name="map_2" max_players="2" data="mymap.fwm"/>
+		<map name="map_4" max_players="4" data="mymap.fwm"/>
+		<map name="map_8" max_players="8" data="mymap.fwm"/>
 	</maps>
 </root>

@@ -15,9 +15,15 @@
 <!-- You should have received a copy of the GNU General Public License -->
 <!-- along with Freewar; if not, write to the Free Software -->
 <!-- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA -->
+
+<!-- FIXME: add '<game> <gamepath>"./"</gamepath> ...' style -->
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-	<game Game="AFirstChaos.xml" GamePath="./" DbPath="premiertest.xml"/>
+	<game GamePath="./" 
+	Game="AFirstChaos.xml"
+	DbPath="premiertest.xml"
+	Event="events.lua"
+	IA="ia.lua"/>
 
 	<video VideoNbBit="16" screen_width="640" screen_height="480"/>
 
