@@ -15,23 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Freewar; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-// Copyright (C) 2004 Freewar Team <doomsday@freewar.net>
 
-// This file is part of Freewar.
-
-// Freewar is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-
-// Freewar is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-
-// You should have received a copy of the GNU General Public License
-// along with Freewar; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 // freewar.cpp for freewar in /u/ept2/huot_j/Freewar/src/Network
 // 
@@ -125,18 +109,18 @@ int			freewar()
     return (1);
   if (load_db_init(db_info, cfg))
      return (1);
-  if (init_connection(NET_GAME_PORT))
+  if (init_connection(NET_GAME_PORT))	// TODO: doit etre enlever
     return (1);
-  if (launch_game(cfg))
+  if (launch_game(cfg))			// TODO: doit etre enlever
     return (1);
-  if (open_connection_to_the_game())
+  if (open_connection_to_the_game())	// TODO: doit etre enlever
     return (1); 
-  SDL_Delay(420);
-  if (give_info_to_game(db_info))
+  SDL_Delay(420);			// TODO: doit etre enlever
+  if (give_info_to_game(db_info))	// TODO: doit etre enlever
     return (1);
   engine->nb_players = 1;
   // attente de AFC qui decide du type de partie (avec qui, etc..)
-	if ((ret = before_starting_game(game_param)))
+	if ((ret = before_starting_game(game_param))) // TODO: doit etreMODIFIE
     {
       if (ret == HOME || ret == REMOTE)
 	{
@@ -144,22 +128,23 @@ int			freewar()
 	  //map y compris
 	  init_engine(engine);
 	  create_and_open_screen(cfg->Screen[0], cfg->Screen[1], cfg->Mode,
-				 SDL_HWSURFACE|SDL_DOUBLEBUF);
+				 SDL_HWSURFACE|SDL_DOUBLEBUF);// TODO: init
+							      // plus haut
 	  if (load_db_data(engine, game_param, cfg))
 	    return (1);
 	  tmp_init(engine, cfg, &engine->g);
 	  //initialise et remplit les structures necessaire (db)
 	  fprintf(fd_log, "Launching demo\n");
-	  if (demo(gfx->win))
+	  if (demo(gfx->win)) // TODO: doit etre mis plus haut
 	    return (1);
 	  fprintf(fd_log, "Finished demo\n");
 	  fprintf(fd_log, "Loading menu...\n");
-	  //if (run_menu(gfx->win))
+	  //if (run_menu(gfx->win)) // TODO: doit etre mis plus haut
 	  //  {
 	  //    fprintf(fd_log, "%s: Quitting game...\n", NAME);
 	  //    return (1);
 	  //  }
-		if (cnt->host)
+		if (cnt->host) // TODO: doit etre modifier
 		{
 			init_connection(cnt->host, NET_GAME_PORT);
 			stock_msg(&(cnt->clients[1]), TAG_JOIN, 0, NULL);
@@ -192,10 +177,10 @@ int			freewar()
   SDLNet_Quit();
   SDL_Quit();
 #ifdef WIN32
- CloseHandle(cfg->GamePid.hProcess);
- CloseHandle(cfg->GamePid.hThread);
+  CloseHandle(cfg->GamePid.hProcess); // TODO: doit etre enlever
+  CloseHandle(cfg->GamePid.hThread); // TODO: doit etre enlever
 #else
-  if (cfg->GamePid)
+  if (cfg->GamePid) // TODO: doit etre enlever
     waitpid(cfg->GamePid, &status, 0);
   fprintf(fd_log, "fin de afc ($?: %d)\n", status);
 #endif
