@@ -1,1 +1,0 @@
-<? echo $pass = md5($pass) ?>

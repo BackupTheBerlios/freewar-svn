@@ -1,7 +1,0 @@
-demander a drax exactement quel info il lui faut pour son jeu.
-
-- Passer les projets win32 "Freewar" et "AfirstCHaos" en tant que
-projet console (par de code de fenetre/form de windows).
---> tej la lib mscvrt.o machin de la compile qui conflict.
-
-- Faire en sorte que le jeu marche sous winwin (create_process(), waitpid(), fork()
