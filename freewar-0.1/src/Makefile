@@ -8,7 +8,7 @@
 ## Last update Sun Jul 18 17:59:24 2004 
 ##
 
-VPATH	=	Network:STD:load:Graphics:Pathfinding:../lib/sdlgfx/\
+VPATH	=	Network:std:load:Graphics:Pathfinding:../lib/sdlgfx/\
 		:Actions:Entities:Graphics/Menu:ActionsBind
 
 SDL_GFX	=	SDL_gfxPrimitives.cpp
