@@ -75,7 +75,7 @@ CLIENT	=	entity_client_std.cpp
 
 SRC	=	freewar.cpp a_faire.cpp get_cfg.cpp std.cpp\
 		launch_demo.cpp add_player.cpp get_pos.cpp game_param.cpp\
-		init_game_connection.cpp init_server_connection.cpp\
+		init_server_connection.cpp\
 		server_connections.cpp engine_client.cpp engine_server.cpp\
 		before_starting_game.cpp open_windows.cpp\
 		get_and_init_sound.cpp get_and_init_display.cpp\
