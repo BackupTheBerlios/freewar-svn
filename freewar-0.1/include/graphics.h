@@ -48,7 +48,8 @@ extern FILE		*fd_log;
 #define	MAXSUBSCREEN	(32)
 #define MAXSAMESURFACE	(32)
 #define	MAXSPRITE	(1024)
-#define MAXENTITY	(50000)
+//#define MAXENTITY	(50000)
+#define MAXENTITY	(9254) // Test voir si cest long
 #define MAXSQUARE	(256)
 #define MAXDEBUG	(32)
 #define MAXKEYPRESS	(10)
@@ -58,7 +59,7 @@ extern FILE		*fd_log;
 #define GFX_MIN_DEPTH	(-500000)
 
 #define GFX_FULL	(SDL_HWSURFACE | SDL_FULLSCREEN | SDL_DOUBLEBUF)
-#define GFX_SW		(SDL_SWSURFACE | SDL_DOUBLEBLUF)
+#define GFX_SW		(SDL_SWSURFACE)
 #define GFX_FULL_SW	(GFX_SW | SDL_FULLSCREEN)
 
 #define RMASK(s)	(s->format->Rmask)
