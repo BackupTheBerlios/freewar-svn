@@ -1,0 +1,5 @@
+Pour le reseau
+###################
+
+TAG_PLAYERS_READY
+
