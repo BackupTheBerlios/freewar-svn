@@ -1,0 +1,28 @@
+DEPUIS LA SOUTENANCE FINALE
+
+# BUGGS RESOLUS
+- une units ne pe se deplacer dans les scales
+  d'un batiment
+- plus de teleportation
+- plus de segfault lors de multi-selection
+- plus de fuite memoire
+- un avion ne passe plus sous les units (layers)
+- bugg d'affichage de fin de map
+
+
+# FEATURES IMPLEMENTEES
+- changement d'action en cours.
+- timer graphique
+- portee de tir
+- vrais dommage
+- cadence de tir
+- menu fonctionnel avec dialog box
+- vitesse de deplacement en fonction du terrain
+- nouvelle couche reseaux plus rapide
+- l'appartenance des unitee est gerer
+- gestion des profondeurs pour les entitees
+  (avec la gestion des collision pour le replacement)
+  (avec la gestion des couches d'affichage)
+- action en multi-selection
+- reseaux fonctionnel pour jouer a plusieurs
+- couleurs de selections differentes suivant player/neutral/opponent

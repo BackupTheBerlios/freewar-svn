@@ -1,0 +1,65 @@
+###########
+engine_cycle:
+
+bon, apres parlage avec gruiiik, thread c'est mal =)
+c'est ce compliquer la vie pour pas grd chose.
+aparement la crainte qu'on avait sur des parties de codent
+qui peuvent etre blocante sont pa fondees, apart ptet pour
+le pathfinding.
+donc > pa de thread sof pour le jeu (ou process), et ptet pour le pathfinding
+
+thread1:
+{
+  si moteur-serveur:
+	-listen_sockets();	# ecoute les clients connectés (dont le client local)
+	-do_request();		# execute les requetes éventuelles
+	-reply_all_players();	# informe les clients des requetes réussis
+
+  si moteur-client:
+	-listen_local_socket();	# ecoute le client local (le jeu)
+	-reply_to_server();	# transmet les requetes au serveur
+}
+
+thread2 (pas de connexion vers l'exterieur):
+{
+	-show_graphic(groupe_plan):	# affiche les graphismes correspondant au groupe
+					# du plan.
+	{
+		-show_hud();
+		si visible:
+		{
+			-show_background();
+			si fog-of-war present;
+			{
+				-show_entity_by_depth(fog_of_war-visible);
+				-show_fog();
+			}
+			sinon:
+			{
+				-show_entity_by_depth();
+				-show_contrast();
+			}
+		}
+		sinon:
+		{
+			-show_black();
+		}
+		-show_selection();
+	}
+}
+
+thread3 (pas de connexion vers l'exterieur):
+{
+	-play_sound();		# joue les sons qui sont sur la queue
+}
+
+thread4 (pas de connexion vers l'exterieur):
+{
+	# cycle indépendant ex: 4 fois par seconde.
+	move_cycle(); # < sera appelé a chaque cycle et appelera le
+			  path-finding si necessaire.
+	attack_cycle();
+	..
+}
+
+##########

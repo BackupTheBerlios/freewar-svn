@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<game>
+	  <name>AFirstChaos</name>
+	  <path>AFirstChaos/</path>
+	  <db>premiertest.xml</db>
+	  <events>afc_events.xml</events>
+	</game>
+
+	<!-- misc -->
+	<video>
+	  <height>480</height>
+	  <width>640</width>
+	  <bpp>16</bpp>
+	</video>
+	<sound>
+	  <left>255</left>
+	  <right>255</right>
+	</sound>
+</root>

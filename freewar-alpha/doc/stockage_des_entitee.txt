@@ -1,0 +1,53 @@
+les requetes pour avoir des informations sur les
+entitees auront plusieurs criteres de cherchage:
+-par UID
+-par coordonnees xy defini
+-par coordonnees xy indefini (proximitee d'une coordonnees xy defini)
+-par etat d'entitee - tache associee/en cours
+-par type d'entitee
+-par sorte d'entitee (precise la difference entre 'sorte' et 'type' merci :)
+-par appartenance
+-par selection courante
+-par selection predefini
+-par etat de vie d'une entitee
+-par sa taille
+
+
+le stockage doit permettre de faire une recherche la plus rapide possible
+avec un ou plusieur parametres de recherche, d'ou l'utilitee d'avoir
+un systeme de stockage de donnee bien penser et rapide !
+
+pkoi pa faire un systeme d'UID du genre :
+- [00-99] pour le type de l'entitee
+- [00-99] pour le numero de l'entitee
+- [00-99] pour son apartenance (voir 00-99 si necessaire)
+- [000000-999999] pour son UID unique
+- [0-1]   pour savoir si il est necessaire de venir chaque tous gerer
+	  l'incrementation des compteur de l'unitee. (reg ou pas)
+
+        18446744073709551615 < long 2^64
+	9999999999999999999  < maximum
+
+genre  : 0311021696154 donnera par exemple :
+03     : type infenterie
+11     : corespond a un footman
+02     : apartien au joueur 2
+1      : signifi que a chaqye cycle on mette a jour ces compteurs.
+696154 : est son UID
+
+apres, comment et ou stocker tous les UID ? ..
+
+tableau en 4d ? < peu poser probleme, vu qu'il va falloir que la
+memoire soit lineaire.. si on a pas UN espace suffisant, sa posera
+probleme .. faut reflechir sur les pointeurs.
+
+mais sa sera pas sufisant pour par exemple une requete:
+va_me_charcher_toutes_les_unitees_presentes_a_lecran_qui_n_ont_aucunes_taches(); =)
+
+sachant qu'evidement les critere comme l'action en cours ou le placement de l'unitee
+sur la map sera inscrite dans la structure associee a cette meme entitee...
+comment faire ?
+
+il faut aussi penser a pouvoir gerer facilement leur cycle de vie.
+
+on malloc le maximum d'entitee par joueur d'un coup ? pkoi pa ^^

@@ -1,0 +1,13 @@
+actions possibles:
+
+- gestion des compteurs: ex -> regeneration, construction, sort ect...
+
+- deplacement
+
+- attaque/recolte
+
+// il y aura une fonction par action, et une queue d'actions.
+ex :
+   -lors d'un deces d'un footman, il se transforme en cadavre pour
+    tant de cycles, il sera alors rajouter dans la queue d'action
+    de destrucction d'entitee au t = t + nbcy > mort : cadavre:uid
