@@ -42,8 +42,8 @@ extern FILE		*fd_log;
 /* stef */
 #define	CASE_SIZE_X	(32)
 #define	CASE_SIZE_Y	(32)
-#define SCROLL_X	(10)
-#define SCROLL_Y	(10)
+#define SCROLL_X	(1)
+#define SCROLL_Y	(1)
 
 #define	MAXSUBSCREEN	(32)
 #define MAXSAMESURFACE	(32)

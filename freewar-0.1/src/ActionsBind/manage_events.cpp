@@ -19,88 +19,112 @@
 // crise cardiaque
 
 #include "freewar.h"
-#define NB_OFF_MOVE (5)
+
+#include <iostream>
+using namespace std;
+
+void		get_pos_verif_move(int *pos, int *off,
+				   int size, int move,
+				   int posmax)
+{
+  *off += move;
+  // verif offset limit:
+  if (*off < 0)
+    {
+      (*pos)--;
+      // verif position limit:
+      if (*pos < 0)
+	{
+	  *pos = 0;
+	  *off = 0;
+	}
+      else
+	*off += size;
+    }
+  if (*off > size)
+    {
+      (*pos)++;
+      // verif position limit:
+      if (*pos >= posmax)
+	{
+	  *pos = posmax - 1;
+	  *off = size;
+	}
+      else
+	*off -= size;
+    }
+}
+
+int		get_pos_inertie(int *inertie, int negative)
+{
+#define MAX_INERTIE (20)
+
+  if (negative)
+    {
+      if (*inertie > 0)
+	*inertie = -(*inertie);
+      if (*inertie > -MAX_INERTIE)
+	*inertie += (*inertie) ? (*inertie) : (-1);
+    }
+  else
+    {
+      if (*inertie < 0)
+	*inertie = -(*inertie);
+      if (*inertie < MAX_INERTIE)
+	*inertie += (*inertie) ? (*inertie) : (1);
+    }
+}
 
 int		get_pos(t_engine *e, int xfin, int yfin)
 {
-  int	flag;
+  static int	inertie_x = 0;
+  static int	inertie_y = 0;
 
-  flag = 0;
+  // FIXME: the size of deplacement between left and right is not the same.
+  // (left is bigger)
+
+  // inertie for X
   if (xfin <= SCROLL_X)
-    {
-      e->g.off_arena.x -= NB_OFF_MOVE;
-      if (e->g.off_arena.x < 0)
-	{
-	  e->g.pos_arena.x--;
-	  e->g.off_arena.x += CASE_SIZE_X;
-	}
-      if (e->g.pos_arena.x < 0)
-	{
-	  e->g.pos_arena.x = 0;
-	  e->g.off_arena.x = 0;
-	}
-	flag = 1;
-    }
+    get_pos_inertie(&inertie_x, 1);
   else if (xfin >= e->g.w_main - SCROLL_X)
-    {
-      e->g.off_arena.x += NB_OFF_MOVE;
-      if (e->g.off_arena.x > CASE_SIZE_X)
-	{
-	  e->g.pos_arena.x++;
-	  e->g.off_arena.x -= CASE_SIZE_X;
-	}
-	flag = 1;
-    }
- if (yfin <= SCROLL_Y)
-    {
-      e->g.off_arena.y -= NB_OFF_MOVE;
-      if (e->g.off_arena.y < 0)
-	{
-	  e->g.pos_arena.y--;
-	  e->g.off_arena.y += CASE_SIZE_Y;
-	}
-      if (e->g.pos_arena.y < 0)
-	{
-	  e->g.pos_arena.y = 0;
-	  e->g.off_arena.y = 0;
-	}
-	return (1);
-    }
- else if (yfin >= e->g.h_main - SCROLL_Y)
-    {
-        e->g.off_arena.y += NB_OFF_MOVE;
-      if (e->g.off_arena.y > CASE_SIZE_Y)
-	{
-	  e->g.pos_arena.y++;
-	  e->g.off_arena.y -= CASE_SIZE_Y;
-	}
-	return (1);
-    }
- return(flag);
+    get_pos_inertie(&inertie_x, 0);
+  else if (inertie_x)
+    inertie_x /= 2;
+
+  // inertie for Y
+  if (yfin <= SCROLL_Y)
+    get_pos_inertie(&inertie_y, 1);
+  else if (yfin >= e->g.h_main - SCROLL_Y)
+    get_pos_inertie(&inertie_y, 0);
+  else if (inertie_y)
+    inertie_y /= 2;
+
+  // move pos and off
+  // for x:
+  if (inertie_x)
+    get_pos_verif_move(&(e->g.pos_arena.x), &(e->g.off_arena.x),
+		       CASE_SIZE_X, inertie_x,
+		       e->map_data.w - e->g.w_main);
+  // for y:
+  if (inertie_y)
+    get_pos_verif_move(&(e->g.pos_arena.y), &(e->g.off_arena.y),
+		       CASE_SIZE_Y, inertie_y,
+		       e->map_data.h - e->g.h_main);
+
+  // return if change:
+  return ((inertie_x || inertie_y) ? (1) : (0));
 }
 
 void		manage_events(t_engine *e)
 {
 	//if (e->events->mousepose[0].button)
 	//{
-	get_pos(e, e->events->xfin / CASE_SIZE_X, e->events->yfin / CASE_SIZE_Y);
-
+	get_pos(e, e->events->xfin / CASE_SIZE_X,
+		e->events->yfin / CASE_SIZE_Y);
 	//}
-	//else if (is_valid_trame(&trame, TAG_EXECUTION))
-	//  ;
-	//else if (is_valid_trame(&trame, TAG_INFO_SCALE))
-	//  req_info_scale(e, &trame, t);
-	//else if (is_valid_trame(&trame, TAG_SELECT_MOVE))
 	//  req_select_move(e, &trame, t);
-	//else if (is_valid_trame(&trame, TAG_SELECT_ATTACK))
 	//  req_select_attack(e, &trame, t);
-	//else if (is_valid_trame(&trame, TAG_SELECT_CREATE_UNITS))
 	//  req_select_create_units(e, &trame, t);
-	//else if (is_valid_trame(&trame, TAG_SELECT_CREATE_BUILDING))
 	//  req_select_create_building(e, &trame, t);
-	//else if (is_valid_trame(&trame, TAG_SELECT))
-	//  {
-	//    puts("SELECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	//    manage_selection(e, &trame, t);
-	//  }
+	//  manage_selection(e, &trame, t);
 }

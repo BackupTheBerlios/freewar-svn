@@ -49,7 +49,7 @@ int		get_events(t_engine *e)
       return (1);
     }
   // Pour tester la console:
-  e->console = true;
+  //  e->console = true;
   // envoyer au jeu les events
   if (e->console == true)
     manage_console(e);

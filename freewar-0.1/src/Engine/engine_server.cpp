@@ -44,6 +44,10 @@ int		engine_server(t_engine *e, t_cfg *cfg,
 #ifdef GRAPHICS_TIME
       Uint32 ticks=SDL_GetTicks();
 #endif
+      if (get_events(e))
+	return (1);
+      aff_game(e, &e->g);
+
       if (timer_wait(e))
 	{
 	  /*
@@ -52,9 +56,6 @@ int		engine_server(t_engine *e, t_cfg *cfg,
 	    mouvements, attaques, construction etc ..
 	  */
 	  manage_entities(e, game_param);
-	  if (get_events(e))
-	    return (1);
-	  aff_game(e, &e->g);
 #ifdef GRAPHICS_TIME
 	  //printf("aff_game TOTAL: %d\n---------\n", SDL_GetTicks() - ticks);
 	  put_error("aff_game\n---------\n");
