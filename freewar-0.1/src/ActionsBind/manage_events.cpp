@@ -55,7 +55,7 @@ void		get_pos_verif_move(int *pos, int *off,
     }
 }
 
-int		get_pos_inertie(int *inertie, int negative)
+void		get_pos_inertie(int *inertie, int negative)
 {
 #define MAX_INERTIE (20)
 

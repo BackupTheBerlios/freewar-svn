@@ -66,8 +66,8 @@
 #include "tinyxml.h"
 #include "tinystr.h"
 
-#include "libstdtool.h"
-#include "libnettool.h"
+#include "doomstools/libstdtool.h"
+#include "doomstools/libnettool.h"
 
 /* #define FW_DEBUG */
 /* #define PATHFIND_DEBUG */
