@@ -31,22 +31,28 @@ int	demo(t_display *win)
 {
   int	logo_h;
 
+  if (!win)
+    return (1);
   win->alpha = 0;
   win->delta_alpha = 7;
-  win->img = IMG_Load("AFirstChaos/img/menu/freewar_logo.png");
+  if (!(win->img = IMG_Load("oldafc/menu/freewar_logo.png")))
+    {
+      fprintf(fd_log, "Error loading image demo\n");
+      return (1);
+    }
   logo_h = win->img->h;
   if (launch_logo(win, (win->res_w - win->img->w) / 2,
 		  (win->res_h - win->img->h) / 2, 60))
-  {
-	  puts("erreur lors du lancement du logo\n");
+    {
+      puts("erreur lors du lancement du logo\n");
       return(1);
-  }
+    }
   win->text = load_string("A First Chaos ...", FONT, 42);
   if (!win->text)
-  {
-	fprintf(fd_log, "Error loading font..\n");
-	exit(1);
-  }
+    {
+      fprintf(fd_log, "Error loading font..\n");
+      exit(1);
+    }
   win->dest.x = (win->res_w - win->text->w) / 2;
   win->dest.y = (win->res_h - win->text->h) / 2 + logo_h + 42;
   aff_surf(win->text, 255);
