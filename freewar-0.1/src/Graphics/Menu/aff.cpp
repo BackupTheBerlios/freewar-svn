@@ -84,7 +84,7 @@ char		*update_txtbox(char *str, SDL_KeyboardEvent *event)
     {
       if (len > 1)
 	{
-	  tmp = xstrndup(str, len - 1);
+	  tmp = xstrndup(str, (size_t)len - 1);
 	  free(str);
 	  str = tmp;
 	}

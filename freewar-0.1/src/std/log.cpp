@@ -18,43 +18,44 @@
 
 #include "freewar.h"
 
-int             get_random(int nb)
-{
-  static int    first = 1;
-  unsigned int  ret;
+#ifndef LOG_FILE
+#define LOG_FILE ("fw.log")
+#endif
 
-  if (first)
+FILE	*fd_log = 0;
+
+int		init_log(char *s)
+{
+  FILE		*fd;
+
+  if (!s)
+    s = LOG_FILE;
+  if((fd = fopen(s, "w")) == NULL)
     {
-      srand((unsigned int)time(0));
-      first = 0;
+      printf("LOG_FILE fopen failed\n");
+      return (1);
     }
-  ret = ((unsigned int)rand()) % nb;
-  return (ret);
+  else
+    {
+      fd_log = fd;
+      fprintf(fd_log, "<FREEWAR>\n");
+    }
+  return (0);
 }
 
-char	*fill_data(size_t len, char *data)
+void		close_log()
 {
-  char	*res;
-
-  res = (char*)xmalloc(len);
-  memcpy(res, data, len);
-  return (res);
+  if (fd_log)
+    fclose(fd_log);
+  fd_log = 0;
 }
 
-char	*add_to_data(size_t len, char *data, size_t plus, char *add)
+int		put_error(char *s)
 {
-  data = (char*)xrealloc(data, len + plus);
-  memcpy(data + len, add, plus);
-  return (data);
-}
-
-bool	exist_file(char *file)
-{
-  FILE	*fd;
-
-  fd = fopen(file, "r");
-  if (!fd)
-    return (false);
-  fclose(fd);
-  return (true);
+  if (fd_log)
+    fprintf(fd_log, "ERROR: %s\n", s);
+  else
+    printf("Warning: log is not initialised\n");
+  printf("\nERROR: %s\n", s);
+  return (1);
 }

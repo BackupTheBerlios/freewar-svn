@@ -9,7 +9,8 @@
 ##
 
 VPATH	=	Network:std:load:Graphics:Pathfinding:../lib/sdlgfx/\
-		:Actions:Entities:Graphics/Menu:ActionsBind:Engine
+		:Actions:Entities:Graphics/Menu:ActionsBind:Engine\
+		:OnNetwork:OnGraphics:Sound
 
 SDL_GFX	=	SDL_gfxPrimitives.cpp
 
@@ -75,23 +76,24 @@ ENTITY	=	construct_entity.cpp place_entity_in_map.cpp\
 
 CLIENT	=	entity_client_std.cpp
 
-STD	=	std.cpp xml_std.cpp
+STD	=	log.cpp std.cpp
+
+SOUND	=	get_and_init_sound.cpp 
 
 SRC	=	freewar.cpp a_faire.cpp get_cfg.cpp\
 		launch_demo.cpp add_player.cpp get_pos.cpp game_param.cpp\
-		init_server_connection.cpp\
-		server_connections.cpp \
+		init_server_connection.cpp server_connections.cpp\
 		before_starting_game.cpp open_windows.cpp\
-		get_and_init_sound.cpp get_and_init_display.cpp\
+		get_and_init_display.cpp\
 		init_globals.cpp get_direction.cpp\
 		$(PATHFINDING) move_clients_to_players.cpp\
 		init_engine.cpp aff_game.cpp init_global_game.cpp\
 		get_path.cpp manage_requests.cpp\
 		manage_selection.cpp join_game.cpp init_minimap.cpp\
 		init_players_for_game.cpp timer.cpp\
-		$(GRAPHICS) $(MENU) $(DB) $(ENTITY) $(NETWORK) $(NET_ENGINE)\
-		$(REQUEST) $(SDL_GFX) $(ACTION) $(CLIENT) $(ACTIONSBIND)\
-		$(ENGINE) $(STD)
+		$(GRAPHICS) $(MENU) $(DB) $(ENTITY) $(NETWORK)\
+		$(NET_ENGINE) $(REQUEST) $(SDL_GFX) $(ACTION)\
+		$(CLIENT) $(ACTIONSBIND) $(ENGINE) $(STD) $(SOUND)
 
 OBJ	=	$(SRC:.cpp=.o)
 
@@ -104,8 +106,12 @@ CXX	=	g++
 CXXFLAGS=	-I../include/ -I../include/sdl/ `sdl-config --cflags` -g3\
 		-I../lib/sdlgfx/ -I ../lib/sdlGL/
 
-LIB	= 	-L../lib/ -L/usr/lib/ -L/usr/local/lib/ -ltinyxml_`uname -s` \
-		`sdl-config --libs` -lSDL -lSDL_net -lSDL_image -lSDL_ttf\
+LIBPATH =	-L../lib/ -L/usr/lib/ -L/usr/loca/lib/
+LIBSDL	=	`sdl-config --libs` -lSDL -lSDL_net -lSDL_image\
+		-lSDL_ttf
+LIB	= 	$(LIBPATH) $(LIBSDL)\
+		-ltinyxml_`uname -s`\
+		-lstdtool -lxmltool
 #		 -lefence
 
 CP	=	/bin/cp -f
@@ -113,7 +119,7 @@ RM	=	/bin/rm -f
 LN	=	/bin/ln -sf
 
 $(NAME)	:	$(OBJ)
-		$(CXX) -o $(NAME) $(OBJ)  $(LIB) $(CFLAGS)
+		$(CXX) -o $(NAME) $(OBJ) $(LIB) $(CFLAGS)
 		$(CP) $(NAME) ../$(EXECUTABLE)
 
 all	:	$(NAME)
