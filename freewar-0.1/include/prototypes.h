@@ -74,6 +74,7 @@ int	manage_player();
 int	get_events(t_engine *e);
 int	send_event();
 int	aff_game(t_engine *e, t_game *g);
+int	aff_mouse(t_engine *e);
 int	play_sound();
 int	timer_wait(t_engine *e);
 

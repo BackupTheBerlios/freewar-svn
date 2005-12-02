@@ -45,7 +45,7 @@ typedef struct	s_cfg
 
   /* sound */
   int	Sound[2]; //ex: 255 left 255 rigth
-}		t_cfg;
+}	t_cfg;
 
 typedef struct		s_map_def
 {
@@ -84,7 +84,7 @@ typedef struct		s_game_param
 typedef struct	s_info_player
 {
   char			id_player;
-}				t_info_player;
+}			t_info_player;
 
 /*
 ** informations recu du jeu
@@ -96,9 +96,9 @@ typedef struct		s_game
   int			screen;
   int			hud;
   int			select;
-  int			arena_lands;
-  int			arena_select;
-  int			*arena_units;
+  int			arena_lands; // layer d'affichage
+  int			arena_select;//
+  int			*arena_units;//
   int			arena_sfx;
   int			w_main;
   int			h_main;

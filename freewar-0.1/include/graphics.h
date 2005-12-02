@@ -35,7 +35,8 @@
 
 extern FILE		*fd_log;
 
-#define GRAPHICS_TIME
+// Definir si on veut faire des perfs 
+/* #define GRAPHICS_TIME */
 /* #define GRAPHICS_DEBUG */
 
 
@@ -49,7 +50,7 @@ extern FILE		*fd_log;
 #define MAXSAMESURFACE	(32)
 #define	MAXSPRITE	(1024)
 //#define MAXENTITY	(50000)
-#define MAXENTITY	(9254) // Test voir si cest long
+#define MAXENTITY	(10000) // Test voir si cest long
 #define MAXSQUARE	(256)
 #define MAXDEBUG	(32)
 #define MAXKEYPRESS	(10)

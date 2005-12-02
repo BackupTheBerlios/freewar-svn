@@ -142,3 +142,52 @@ int			req_info_scale(t_engine *e, t_trame *trame, int src)
 //   printf("len totale: [%d]\n", sizeof(int) + sizeof(char) + len);
   return (0);
 }
+
+t_req_info_scale	*info_scale(t_engine *e, t_game_info_scale *game)
+{
+  t_req_info_scale	*req;
+  t_coord		pos;
+  int			len;
+  char			*data;
+  int			t;
+
+  req = (t_req_info_scale*)xmalloc(sizeof(*req));
+  data = 0;
+  if (game->pos.x < 0 || game->pos.x >= e->map_data.w ||
+      game->pos.y < 0 || game->pos.y >= e->map_data.h)
+    {
+      fprintf(stderr, "ERROR: req_info_scale: failed\n");
+      req->nb_ent = -1;
+      return (NULL);
+    }
+  len = 0;
+  t = 0;
+  pos = game->pos;
+  // v regarde la case du click
+  t += search_entity_on_click(e, game, &len, &data, &pos);
+  if (pos.x > 1) // regarde la case a gauche
+    {
+      pos.x--;
+      t += search_entity_on_click(e, game, &len, &data, &pos);
+      pos.x++;
+    }
+  if (pos.y > 1) // regarde la case au dessus
+    {
+      pos.y--;
+      t += search_entity_on_click(e, game, &len, &data, &pos);
+      pos.y++;
+    }
+  if (pos.x > 1 && pos.y > 1) // regarde la case en haut a gauche
+    {
+      pos.x--;
+      pos.y--;
+      t += search_entity_on_click(e, game, &len, &data, &pos);
+      pos.x++;
+      pos.y++;
+    }
+
+  if (data)
+    memcpy(&(req->ent), data, len);
+  req->nb_ent = t;
+  return (req);
+}

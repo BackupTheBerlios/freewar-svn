@@ -37,7 +37,7 @@ int		engine_server(t_engine *e, t_cfg *cfg,
       // Ca aura pour but d'integrer l'execution de manage_requests dans
       // check_select.. (optimisation) 
       // TODOupdate: c'est mainteannt dans process.c
-      if (check_select(100))
+      if (check_select(0))
 	;
       // si un player n'a plu d'entitees en vie .. il meur X)
       manage_player();

@@ -84,7 +84,7 @@ SRC	=	freewar.cpp a_faire.cpp get_cfg.cpp\
 		get_and_init_display.cpp\
 		init_globals.cpp get_direction.cpp\
 		$(PATHFINDING) move_clients_to_players.cpp\
-		init_engine.cpp aff_game.cpp init_global_game.cpp\
+		init_engine.cpp aff_game.cpp aff_mouse.cpp init_global_game.cpp\
 		get_path.cpp process.cpp\
 		manage_selection.cpp join_game.cpp init_minimap.cpp\
 		init_players_for_game.cpp timer.cpp\
@@ -102,9 +102,9 @@ EXECUTABLE =	freewar
 CC	=	g++
 
 CXXFLAGS=	-I../include/ -I../include/sdl/ `sdl-config --cflags` -g3\
-		-I../lib/sdlgfx/ -I../lib/sdlGL/ -I../lib/xtools\
+		-I../lib/sdlgfx/ -I../lib/sdlGL/ -I../lib/doomstools\
 
-LIBPATH =	-L../lib/ -L/usr/lib/ -L/usr/local/lib/
+LIBPATH =	-L../lib/ -L/usr/lib/ -L/usr/local/lib/ -L../lib/doomstools
 
 LIBSDL	=	`sdl-config --libs` -lSDL -lSDL_net -lSDL_image\
 		-lSDL_ttf

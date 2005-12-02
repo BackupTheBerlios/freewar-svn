@@ -117,10 +117,13 @@ int		get_pos(t_engine *e, int xfin, int yfin)
 
 void		manage_events(t_engine *e)
 {
+  // TODO: Modifier ça pour rendre le clic de nouveau utilisable.
+  get_pos(e, e->events->xfin / CASE_SIZE_X,
+	  e->events->yfin / CASE_SIZE_Y);
+
 	//if (e->events->mousepose[0].button)
 	//{
-	get_pos(e, e->events->xfin / CASE_SIZE_X,
-		e->events->yfin / CASE_SIZE_Y);
+  // Pour debug le deplacement de souris uniquement:
 	//}
 	//  req_select_move(e, &trame, t);
 	//  req_select_attack(e, &trame, t);

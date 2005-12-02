@@ -68,11 +68,22 @@ void		init_gfx()
   }
 }
 
+#ifndef WIN32
+#include "SDL_getenv.h"
+void		set_sdl_env()
+{
+  putenv("SDL_VIDEO_X11_MOUSEACCEL=2/1");
+}
+#endif
+
 int		create_and_open_screen(int sizex, int sizey, int bpp, int mode)
 {
   static bool	first = true;
   static bool	dofree = false;
 
+#ifndef WIN32
+  set_sdl_env();
+#endif
   if (dofree == true)
     {
       dofree = false;

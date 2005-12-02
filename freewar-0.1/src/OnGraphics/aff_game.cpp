@@ -198,11 +198,18 @@ int		aff_game(t_engine *e, t_game *g)
    timer_count("update_surf", false);
 #endif
 #ifdef GRAPHICS_TIME
-   timer_count("aff_squae&minimap", true);
+   timer_count("aff_square&minimap", true);
 #endif
    aff_square_minimap(e);
 #ifdef GRAPHICS_TIME
    timer_count("aff_square&minimap", false);
+#endif
+#ifdef GRAPHICS_TIME
+   timer_count("aff_mouse", true);
+#endif
+   aff_mouse(e);
+#ifdef GRAPHICS_TIME
+   timer_count("aff_mouse", false);
 #endif
 #ifdef GRAPHICS_TIME
    timer_count("aff_screen", true);

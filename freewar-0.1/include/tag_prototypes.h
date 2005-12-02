@@ -17,9 +17,11 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #ifndef _TAG_PROTOTYPES_H_
 #define _TAG_PROTOTYPES_H_
+
 int	manage_selection(t_engine *e, t_trame *t, int player);
 
 /* req_info_scale.cpp */
+t_req_info_scale	*info_scale(t_engine *e, t_game_info_scale *trame);
 int		req_info_scale(t_engine *e, t_trame *trame, int player);
 
 /* req_select_move.cpp */

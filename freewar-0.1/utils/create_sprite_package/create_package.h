@@ -25,6 +25,7 @@
 ** Last update Mon Jun  7 17:39:43 2004 stephane petitcolas
 */
 
+#include	<string.h>
 #include	<stdio.h>
 #include	<stdlib.h>
 #include	<fcntl.h>
