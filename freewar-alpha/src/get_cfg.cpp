@@ -9,7 +9,8 @@
 //
 
 #include "freewar.h"
-char *xml_getspy() {return (NULL);};
+
+char *xml_getspy() {return (xml_getstr("value"));};
 
 int		get_gamecfg(t_cfg *cfg)
 {

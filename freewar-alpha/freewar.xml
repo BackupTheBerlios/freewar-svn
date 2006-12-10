@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 	<game>
-	  <name>AFirstChaos</name>
-	  <path>AFirstChaos/</path>
-	  <db>premiertest.xml</db>
-	  <events>afc_events.xml</events>
+	  <name value="AFirstChaos"></name>
+	  <path value="AFirstChaos/">/</path>
+	  <db value="premiertest.xml"></db>
+	  <events value="afc_events.xml"></events>
 	</game>
 
 	<!-- misc -->
 	<video>
-	  <height>480</height>
-	  <width>640</width>
-	  <bpp>16</bpp>
+	  <height value="600"></height>
+	  <width value="800"></width>
+	  <bpp value="16"></bpp>
 	</video>
 	<sound>
-	  <left>255</left>
-	  <right>255</right>
+	  <left value="255"></left>
+	  <right value="255"></right>
 	</sound>
 </root>
